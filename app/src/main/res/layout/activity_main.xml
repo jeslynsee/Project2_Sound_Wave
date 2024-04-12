@@ -7,12 +7,33 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_width="390dp"
+        android:id="@+id/Title"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:text="@string/welcome_to_sondwave"
+        android:textSize="26sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <TextView
+        android:id="@+id/select_genre"
+        android:layout_width="390dp"
+        android:layout_height="75dp"
+        android:gravity="center"
+        android:textSize="26sp"
+        app:layout_constraintTop_toBottomOf="@id/Title"
+        app:layout_constraintBottom_toBottomOf=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/select_your_favorite_genres"
+
+
+/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
