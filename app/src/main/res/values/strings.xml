@@ -7,4 +7,6 @@
     <string name="enter_password">Enter password</string>
     <string name="sign_in">Sign In</string>
     <string name="not_a_user_sign_up_here">Not a user? Sign up here</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_buttonLabel">Sign Up!</string>
 </resources>
