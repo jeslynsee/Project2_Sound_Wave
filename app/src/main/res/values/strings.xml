@@ -2,4 +2,15 @@
     <string name="app_name">Project2_Sound_Wave</string>
     <string name="welcome_to_sondwave">Welcome to SondWave!</string>
     <string name="select_your_favorite_genres">Select your favorite genres</string>
+    <string name="blues">Blues</string>
+    <string name="country">Country</string>
+    <string name="electronic">Electronic</string>
+    <string name="folk">Folk</string>
+    <string name="hip_hop">Hip-Hop</string>
+    <string name="chill">Chill</string>
+    <string name="classical">Classical</string>
+    <string name="jazz">Jazz</string>
+    <string name="alt">Alt</string>
+    <string name="indie">Indie</string>
+    <string name="latin">Latin</string>
 </resources>
