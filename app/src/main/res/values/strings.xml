@@ -13,4 +13,11 @@
     <string name="alt">Alt</string>
     <string name="indie">Indie</string>
     <string name="latin">Latin</string>
+    <string name="metal">Metal</string>
+    <string name="opera">Opera</string>
+    <string name="psychedelic">Psychedelic</string>
+    <string name="rap">Rap</string>
+    <string name="r_and_b">R and B</string>
+    <string name="soul">Soul</string>
+    <string name="trap">Trap</string>
 </resources>
