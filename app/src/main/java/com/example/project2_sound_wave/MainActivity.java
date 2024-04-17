@@ -10,6 +10,8 @@ import android.widget.Toast;
 import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String TAG = "SOUNDWAVE";
     ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
