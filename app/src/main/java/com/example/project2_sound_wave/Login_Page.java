@@ -2,28 +2,33 @@ package com.example.project2_sound_wave;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.project2_sound_wave.databinding.ActivityMainBinding;
+import com.example.project2_sound_wave.database.SoundWaveRepository;
+import com.example.project2_sound_wave.databinding.ActivityLoginPageBinding;
 
-public class MainActivity extends AppCompatActivity {
+public class Login_Page extends AppCompatActivity {
 
     public static final String TAG = "SOUNDWAVE";
-    ActivityMainBinding binding;
+    ActivityLoginPageBinding binding;
+    private SoundWaveRepository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityLoginPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        repository = SoundWaveRepository.getRepository(getApplication());
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // message displaying success for now to indicate listener works for button
-                Toast.makeText(MainActivity.this, "Successfully logged in!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Login_Page.this, "Successfully logged in!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -38,4 +43,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public static Intent loginIntentFactory(Context context) {
+        Intent intent = new Intent(context, Login_Page.class);
+        return intent;
+    }
+
 }

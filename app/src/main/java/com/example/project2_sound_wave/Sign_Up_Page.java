@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 import com.example.project2_sound_wave.databinding.ActivitySignUpPageBinding;
 
 public class Sign_Up_Page extends AppCompatActivity {
@@ -24,6 +23,14 @@ public class Sign_Up_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Sign_Up_Page.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        binding.loginRedirectTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
+                startActivity(intent);
             }
         });
 

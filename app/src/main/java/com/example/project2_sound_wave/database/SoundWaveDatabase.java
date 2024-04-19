@@ -10,14 +10,16 @@ import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.project2_sound_wave.database.entities.SoundWave;
-import com.example.project2_sound_wave.MainActivity;
+import com.example.project2_sound_wave.Login_Page;
+import com.example.project2_sound_wave.database.entities.User;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {SoundWave.class}, version = 1, exportSchema = false)
+@Database(entities = {SoundWave.class, User.class}, version = 1, exportSchema = false)
 public abstract class SoundWaveDatabase extends RoomDatabase {
-    private static final String DATABASE_NAME = "SoundWave_database";
+    public static final String USER_TABLE = "usertable";
+    private static final String DATABASE_NAME = "SoundWavedatabase";
     public static final String SOUND_WAVE_TABLE = "soundWaveTable";
 
     private static volatile SoundWaveDatabase INSTANCE;
@@ -44,13 +46,23 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
     }
 
     private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback(){
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
+            @Override
+            public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            Log.i(MainActivity.TAG, "DATABASE CREATED!");
-            //TODO: add databaseWriteExecutor.execute(() -> {...}
+            Log.i(Login_Page.TAG, "DATABASE CREATED!");
+            databaseWriteExecutor.execute(() -> {
+                UserDAO dao = INSTANCE.userDAO();
+                dao.deleteAll();
+                User admin = new User("admin2", "admin2");
+                admin.setAdmin(true);
+                dao.insert(admin);
+                User testUser1 = new User("testuser1", "testuser1");
+                dao.insert(testUser1);
+            });
         }
     };
 
     public abstract SoundWaveDAO soundWaveDAO();
+
+    public abstract UserDAO userDAO();
 }

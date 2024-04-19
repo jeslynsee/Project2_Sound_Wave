@@ -9,4 +9,10 @@
     <string name="not_a_user_sign_up_here">Not a user? Sign up here</string>
     <string name="sign_up">Sign Up</string>
     <string name="sign_up_buttonLabel">Sign Up!</string>
+    <string name="soundwave">SoundWave</string>
+    <string name="music_for_you">Music for YOU</string>
+    <string name="get_started_by">Get started by...</string>
+    <string name="create_an_account">Create an account</string>
+    <string name="or">or</string>
+    <string name="already_have_an_account_sign_in_here">Already have an account? Sign in here</string>
 </resources>
