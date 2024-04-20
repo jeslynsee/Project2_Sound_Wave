@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Starting_Page">
+
+    <TextView
+        android:id="@+id/soundWave_textView"
+        android:layout_width="213dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="52dp"
+        android:gravity="center"
+        android:text="@string/soundwave"
+        android:textSize="35sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/music_for_you_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/music_for_you"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/soundWave_textView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/get_started_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/get_started_by"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/music_for_you_textView"
+        app:layout_constraintVertical_bias="0.139" />
+
+    <Button
+        android:id="@+id/create_an_account_button"
+        android:layout_width="233dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="52dp"
+        android:text="@string/create_an_account"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@id/get_started_textView"
+        app:layout_constraintStart_toStartOf="@id/get_started_textView"
+        app:layout_constraintTop_toBottomOf="@id/get_started_textView" />
+
+    <TextView
+        android:id="@+id/or_textView"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
+        android:gravity="center"
+        android:text="@string/or"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@id/create_an_account_button"
+        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintStart_toStartOf="@id/create_an_account_button"
+        app:layout_constraintTop_toBottomOf="@id/create_an_account_button" />
+
+    <Button
+        android:id="@+id/starting_page_login_button"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="132dp"
+        android:text="@string/login"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@id/create_an_account_button"
+        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="@id/create_an_account_button"
+        app:layout_constraintTop_toBottomOf="@id/create_an_account_button" />
+</androidx.constraintlayout.widget.ConstraintLayout>
