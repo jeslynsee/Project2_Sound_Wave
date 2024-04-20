@@ -26,6 +26,7 @@ public class Sign_Up_Page extends AppCompatActivity {
             }
         });
 
+        // if user clicks this, it will redirect them to Login page
         binding.loginRedirectTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
