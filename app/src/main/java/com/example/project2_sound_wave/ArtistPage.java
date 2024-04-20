@@ -4,23 +4,27 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
 
-public class ArtistPage {
+import com.example.project2_sound_wave.databinding.ActivityArtistPageBinding;
+
+
+public class ArtistPage extends AppCompatActivity {
     private static final String ARTIST_VALUE_EXTRA_KEY = "Artist_Page";
+    ActivityArtistPageBinding binding;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.artist_page);
+        binding = ActivityArtistPageBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
 
     }
 
 
-        public static Intent artistPageIntentFactory (Context context){
-            Intent intent = new Intent(context, ArtistPage.class);
-            Intent intent = intent.putExtra(ARTIST_VALUE_EXTRA_KEY);
-
-            return intent;
+    public static Intent artistPageIntentFactory (Context context){
+        Intent intent = new Intent(context, ArtistPage.class);
+        return intent;
 
     }
 }
