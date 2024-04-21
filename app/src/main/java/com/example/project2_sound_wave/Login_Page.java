@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -16,10 +17,8 @@ import com.example.project2_sound_wave.databinding.ActivityLoginPageBinding;
 public class Login_Page extends AppCompatActivity {
 
     public static final String TAG = "SOUNDWAVE";
-
-    private static final String USERNAME_KEY = "com.example.project2_sound_wave.USERNAME_KEY";
-
     ActivityLoginPageBinding binding;
+//    private User user = null;
 
     private SoundWaveRepository repository;
     @Override
@@ -77,6 +76,8 @@ public class Login_Page extends AppCompatActivity {
 
     static Intent loginIntentFactory(Context context) {
         Intent intent = new Intent(context, Login_Page.class);
+//        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
+        // need to get User info to Options Page somehow
         return intent;
     }
 
