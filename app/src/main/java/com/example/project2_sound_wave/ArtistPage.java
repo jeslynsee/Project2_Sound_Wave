@@ -22,7 +22,7 @@ public class ArtistPage extends AppCompatActivity {
     }
 
 
-    public static Intent artistPageIntentFactory (Context context){
+    static Intent artistPageIntentFactory (Context context){
         Intent intent = new Intent(context, ArtistPage.class);
         return intent;
 
