@@ -11,26 +11,27 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
 
-
+import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.entities.User;
-import com.example.project2_sound_wave.databinding.ActivityMainBinding;
+import com.example.project2_sound_wave.databinding.ActivityOptionsPageBinding;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
-    ActivityMainBinding binding;
+public class Options_Page extends AppCompatActivity {
+    private static final String OPTIONS_PAGE_USER_ID = "com.example.project2_sound_wave.OPTIONS_PAGE_USER_ID";
+    ActivityOptionsPageBinding binding;
+
+    SoundWaveRepository repository;
 
     //TODO: add Login user information
     private int loggedInUserId = -1;
     private User user;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityOptionsPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        repository = SoundWaveRepository.getRepository(getApplication());
 
         loginUser();
         invalidateOptionsMenu();
@@ -40,20 +41,12 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
-
-        binding.SubmitButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-            public void onClick(View v) {
-             Intent intent = ArtistPage.artistPageIntentFactory(getApplicationContext());
-             startActivity(intent);
-            }
-        });
     }
 
     private void loginUser() {
         //TODO: Make loginUser FUNCTIONAL
         user = new User("Jeslyn", "jeslyn");
-        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, -1);
+        loggedInUserId = getIntent().getIntExtra(OPTIONS_PAGE_USER_ID, -1);
     }
 
     @Override
@@ -79,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showLogOutDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Options_Page.this);
         final AlertDialog alertDialog = alertBuilder.create();
 
         alertBuilder.setMessage("Are you sure you want to sign out?");
@@ -106,11 +99,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(Starting_Page.startingPageIntentFactory(getApplicationContext()));
     }
 
-    static Intent mainActivityIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
+    static Intent optionsPageIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, Options_Page.class);
+        intent.putExtra(OPTIONS_PAGE_USER_ID, userId);
         return intent;
     }
-
-
 }
