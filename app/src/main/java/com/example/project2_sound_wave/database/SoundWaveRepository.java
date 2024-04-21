@@ -3,6 +3,8 @@ package com.example.project2_sound_wave.database;
 import android.app.Application;
 import android.util.Log;
 
+import androidx.lifecycle.LiveData;
+
 import com.example.project2_sound_wave.database.entities.SoundWave;
 import com.example.project2_sound_wave.Login_Page;
 import com.example.project2_sound_wave.database.entities.User;
@@ -77,20 +79,12 @@ public class SoundWaveRepository {
         });
     }
 
-    public User getUserByUserName(String username) {
-        Future<User> future = SoundWaveDatabase.databaseWriteExecutor.submit(
-                new Callable<User>() {
-                    @Override
-                    public User call() throws Exception {
-                        return userDAO.getUserByUserName(username);
-                    }
-                }
-        );
-        try {
-            return future.get();
-        } catch(InterruptedException | ExecutionException e) {
-            Log.d(Login_Page.TAG, "Problem getting User, thread error.");
-        }
-        return null;
+    public LiveData<User> getUserByUserName(String username) {
+        return userDAO.getUserByUserName(username);
     }
+
+    public LiveData<User> getUserByUserId(int userId) {
+        return userDAO.getUserByUserId(userId);
+    }
+
 }
