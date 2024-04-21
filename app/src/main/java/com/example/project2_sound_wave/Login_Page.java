@@ -1,9 +1,11 @@
 package com.example.project2_sound_wave;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -16,7 +18,7 @@ public class Login_Page extends AppCompatActivity {
 
     public static final String TAG = "SOUNDWAVE";
     ActivityLoginPageBinding binding;
-    private User user = null;
+//    private User user = null;
 
     private SoundWaveRepository repository;
     @Override
@@ -30,16 +32,7 @@ public class Login_Page extends AppCompatActivity {
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!verifyUser()) {
-                    toastMaker("Invalid Username or Password");
-                } else {
-                    // message displaying success for now to indicate listener works for button
-                    toastMaker("Successfully logged in!");
-                    //Moved previous Intent to start MainActivity to Sign Up Page because MainActivity is a landing page for new users
-                    // This intent to start up Options Page for returning users
-                    Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), user.getId());
-                    startActivity(intent);
-                }
+                verifyUser();
             }
         });
 
@@ -55,23 +48,26 @@ public class Login_Page extends AppCompatActivity {
         });
     }
 
-    private boolean verifyUser() {
+    private void verifyUser() {
         String username = binding.usernameTextEdit.getText().toString();
         if (username.isEmpty()) {
             toastMaker("Cannot have blank Username");
-            return false;
+            return;
         }
-        user = repository.getUserByUserName(username);
-        if (user != null) {
-            String password = binding.passwordEditText.getText().toString();
-            if (password.equals(user.getPassword())) {
-                return true;
+        LiveData<User> userObserver = repository.getUserByUserName(username);
+        userObserver.observe(this, user -> {
+            if (user != null) {
+                String password = binding.passwordEditText.getText().toString();
+                if (password.equals(user.getPassword())) {
+                    Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), user.getId());
+                    startActivity(intent);
+                } else {
+                    toastMaker("Invalid Password");
+                }
             } else {
-                Toast.makeText(this, "Invalid Password", Toast.LENGTH_SHORT).show();
+                toastMaker(String.format("No %s found", username));
             }
-        }
-        toastMaker(String.format("No %s found", username));
-        return false;
+        });
     }
 
     private void toastMaker(String message) {
@@ -80,6 +76,8 @@ public class Login_Page extends AppCompatActivity {
 
     static Intent loginIntentFactory(Context context) {
         Intent intent = new Intent(context, Login_Page.class);
+//        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
+        // need to get User info to Options Page somehow
         return intent;
     }
 

@@ -41,4 +41,6 @@
     <string name="my_playlist">My Playlist</string>
     <string name="browse_artists">Browse Artists</string>
     <string name="recently_added">Recently Added</string>
+    <string name="delete_users">Delete Users</string>
+    <string name="admin">Admin</string>
 </resources>
