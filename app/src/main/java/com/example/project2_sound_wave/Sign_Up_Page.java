@@ -23,6 +23,8 @@ public class Sign_Up_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(Sign_Up_Page.this, "Sign Up Successful!", Toast.LENGTH_SHORT).show();
+                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), 0);
+                startActivity(intent);
             }
         });
 
@@ -38,7 +40,7 @@ public class Sign_Up_Page extends AppCompatActivity {
     }
 
     // created intent here, so we can start up this activity from button click in Main
-    public static Intent signUpIntentFactory(Context context) {
+    static Intent signUpIntentFactory(Context context) {
         Intent intent = new Intent(context, Sign_Up_Page.class);
         return intent;
     }

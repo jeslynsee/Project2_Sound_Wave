@@ -76,4 +76,21 @@ public class SoundWaveRepository {
             userDAO.insert(user);
         });
     }
+
+    public User getUserByUserName(String username) {
+        Future<User> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<User>() {
+                    @Override
+                    public User call() throws Exception {
+                        return userDAO.getUserByUserName(username);
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch(InterruptedException | ExecutionException e) {
+            Log.d(Login_Page.TAG, "Problem getting User, thread error.");
+        }
+        return null;
+    }
 }

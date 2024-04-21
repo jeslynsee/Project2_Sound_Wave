@@ -18,9 +18,12 @@ public interface UserDAO {
     @Delete
     void delete(User user);
 
-    @Query("SELECT * FROM " + SoundWaveDatabase.USER_TABLE)
+    @Query("SELECT * FROM " + SoundWaveDatabase.USER_TABLE + " ORDER BY username")
     List<User> getAllUsers();
 
     @Query("DELETE from " + SoundWaveDatabase.USER_TABLE)
     void deleteAll();
+
+    @Query("SELECT * FROM " + SoundWaveDatabase.USER_TABLE + " WHERE username == :username")
+    User getUserByUserName(String username);
 }
