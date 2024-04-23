@@ -13,11 +13,25 @@ public class Playlist {
     @PrimaryKey
     private int id;
 
-//    private List<String> artists;
-//    private List<String> genres;
+    private List<String> artists;
+    private List<String> genres;
     private String username;
-    //TODO: create TypeConverters for the Lists above
 
+    public List<String> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(List<String> artists) {
+        this.artists = artists;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
+    }
 
     public String getUsername() {
         return username;
