@@ -9,6 +9,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.SoundWave;
 import com.example.project2_sound_wave.Login_Page;
 import com.example.project2_sound_wave.database.entities.User;
@@ -16,11 +17,12 @@ import com.example.project2_sound_wave.database.entities.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {SoundWave.class, User.class}, version = 1, exportSchema = false)
+@Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 1, exportSchema = false)
 public abstract class SoundWaveDatabase extends RoomDatabase {
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "SoundWavedatabase";
     public static final String SOUND_WAVE_TABLE = "soundWaveTable";
+    public static final String PLAYLIST_TABLE = "playlistTable";
 
     private static volatile SoundWaveDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -65,4 +67,6 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
     public abstract SoundWaveDAO soundWaveDAO();
 
     public abstract UserDAO userDAO();
+
+    public abstract PlaylistDAO playlistDAO();
 }
