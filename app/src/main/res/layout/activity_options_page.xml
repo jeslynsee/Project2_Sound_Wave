@@ -58,11 +58,13 @@
 
     <Button
         android:id="@+id/admin_button"
-        android:layout_width="125dp"
-        android:layout_height="61dp"
-        android:layout_marginTop="56dp"
-        android:text="@string/admin"
+        android:layout_width="255dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/admin_settings"
+        android:textSize="23sp"
         android:visibility="invisible"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recently_added_button" />

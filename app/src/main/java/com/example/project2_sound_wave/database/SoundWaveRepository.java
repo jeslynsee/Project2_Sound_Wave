@@ -17,6 +17,7 @@ import java.util.concurrent.Future;
 public class SoundWaveRepository {
     private final SoundWaveDAO soundWaveDAO;
     private final UserDAO userDAO;
+    private final PlaylistDAO playlistDAO;
     private ArrayList<SoundWave> allLogs;
 
     private static SoundWaveRepository repository;
@@ -25,6 +26,7 @@ public class SoundWaveRepository {
         SoundWaveDatabase db = SoundWaveDatabase.getDatabase(application);
         this.soundWaveDAO = db.soundWaveDAO();
         this.userDAO = db.userDAO();
+        this.playlistDAO = db.playlistDAO();
         this.allLogs = (ArrayList<SoundWave>) this.soundWaveDAO.getAllRecords();
     }
 
