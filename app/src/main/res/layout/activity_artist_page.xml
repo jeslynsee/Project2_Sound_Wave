@@ -6,4 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ArtistPage">
 
+    <TextView
+        android:id="@+id/ArtistRecomend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/based_on_your_selections_we_recomend_these_artists"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:layout_width=""
+        android:layout_height=""
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ArtistRecomend"
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
