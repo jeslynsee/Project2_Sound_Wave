@@ -17,10 +17,10 @@ public class SoundWave {
 
     private int userId;
 
-    public SoundWave(String artist, String genre, int userId) {
+    public SoundWave(String artist, String genre) {
         this.artist = artist;
         this.genre = genre;
-        this.userId = userId;
+
     }
 
     @Override
@@ -60,11 +60,4 @@ public class SoundWave {
         this.genre = genre;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
 }

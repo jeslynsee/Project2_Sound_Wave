@@ -43,4 +43,6 @@
     <string name="recently_added">Recently Added</string>
     <string name="delete_users">Delete Users</string>
     <string name="admin">Admin</string>
+    <string name="based_on_your_selections_we_recomend_these_artists"> Based on your selections we recomend these artists! </string>
+            />
 </resources>

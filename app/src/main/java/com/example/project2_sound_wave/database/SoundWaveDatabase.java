@@ -61,7 +61,18 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 User testUser1 = new User("testuser1", "testuser1");
                 dao.insert(testUser1);
 
+
+                SoundWaveDAO genres = INSTANCE.soundWaveDAO();
+                SoundWave Artist1 = new SoundWave("Ray Charles", "Blues");
+                SoundWave Artist2 = new SoundWave("Stevie", "Blues");
+
+
+
+
+
             });
+
+
         }
     };
 
