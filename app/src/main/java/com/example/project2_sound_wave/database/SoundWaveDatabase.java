@@ -64,6 +64,7 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
         }
     };
 
+
     public abstract SoundWaveDAO soundWaveDAO();
 
     public abstract UserDAO userDAO();
