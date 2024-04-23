@@ -60,6 +60,7 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 dao.insert(admin);
                 User testUser1 = new User("testuser1", "testuser1");
                 dao.insert(testUser1);
+
             });
         }
     };
