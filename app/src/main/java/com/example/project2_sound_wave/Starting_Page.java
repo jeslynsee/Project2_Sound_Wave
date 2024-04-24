@@ -7,15 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.databinding.ActivityStartingPageBinding;
 
 public class Starting_Page extends AppCompatActivity {
     ActivityStartingPageBinding binding;
+
+    SoundWaveRepository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityStartingPageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        repository = SoundWaveRepository.getRepository(getApplication());
 
         binding.createAnAccountButton.setOnClickListener(new View.OnClickListener() {
             @Override

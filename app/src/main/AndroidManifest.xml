@@ -13,6 +13,18 @@
         android:theme="@style/Theme.AppCompat.DayNight.DarkActionBar"
         tools:targetApi="31">
         <activity
+            android:name=".Admin_Settings_Page"
+            android:exported="false" />
+        <activity
+            android:name=".Recently_Added_Page"
+            android:exported="false" />
+        <activity
+            android:name=".Browse_Artists_Page"
+            android:exported="false" />
+        <activity
+            android:name=".User_Playlist_Page"
+            android:exported="false" />
+        <activity
             android:name=".Options_Page"
             android:exported="false" />
         <activity

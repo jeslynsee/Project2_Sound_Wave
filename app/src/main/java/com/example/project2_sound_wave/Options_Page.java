@@ -48,6 +48,37 @@ public class Options_Page extends AppCompatActivity {
             startActivity(intent);
         }
 
+        binding.myPlaylistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = User_Playlist_Page.userPlaylistIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        binding.browseArtistsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Browse_Artists_Page.browseArtistsPageIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
+        binding.recentlyAddedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = Recently_Added_Page.recentlyAddedPageIntentFactory(getApplicationContext());
+               startActivity(intent);
+            }
+        });
+
+        binding.adminButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Admin_Settings_Page.adminSettingsPageIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
     }
 
 

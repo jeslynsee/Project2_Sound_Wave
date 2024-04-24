@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -17,8 +16,10 @@ import com.example.project2_sound_wave.databinding.ActivityLoginPageBinding;
 public class Login_Page extends AppCompatActivity {
 
     public static final String TAG = "SOUNDWAVE";
+
+    private static final String USERNAME_KEY = "com.example.project2_sound_wave.USERNAME_KEY";
+
     ActivityLoginPageBinding binding;
-//    private User user = null;
 
     private SoundWaveRepository repository;
     @Override

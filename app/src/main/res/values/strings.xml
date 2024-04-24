@@ -44,4 +44,5 @@
     <string name="delete_users">Delete Users</string>
     <string name="admin">Admin</string>
     <string name="admin_settings">Admin Settings</string>
+    <string name="artists">Artists</string>
 </resources>
