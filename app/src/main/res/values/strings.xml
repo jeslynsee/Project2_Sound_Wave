@@ -45,4 +45,8 @@
     <string name="admin">Admin</string>
     <string name="admin_settings">Admin Settings</string>
     <string name="artists">Artists</string>
+    <string name="delete_user">Delete User</string>
+    <string name="add_user">Add User</string>
+    <string name="delete_genre">Delete Genre</string>
+    <string name="add_genre">Add Genre</string>
 </resources>
