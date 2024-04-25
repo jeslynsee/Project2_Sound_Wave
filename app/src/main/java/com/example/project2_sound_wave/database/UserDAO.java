@@ -30,4 +30,8 @@ public interface UserDAO {
 
     @Query("SELECT * FROM " + SoundWaveDatabase.USER_TABLE + " WHERE id == :userId")
     LiveData<User> getUserByUserId(int userId);
+
+    @Query("SELECT username FROM " + SoundWaveDatabase.USER_TABLE)
+     LiveData<List<String>> getAllUsernames();
+
 }
