@@ -2,6 +2,7 @@ package com.example.project2_sound_wave;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import com.example.project2_sound_wave.databinding.ActivitySignUpPageBinding;
 public class Sign_Up_Page extends AppCompatActivity {
     ActivitySignUpPageBinding binding;
     SoundWaveRepository repository;
+    private Observer<User> userObserver;
     private static final String SIGN_UP_KEY = "com.example.project2_sound_wave.SIGN_UP_KEY";
 
     @Override
@@ -54,20 +56,29 @@ public class Sign_Up_Page extends AppCompatActivity {
             return;
         }
 
-        LiveData<User> userObserver = repository.getUserByUserName(username);
-        userObserver.observe(this, user -> {
+        userObserver = new Observer<User>() {
 
-            if (user != null) {
-                toastMaker("Username already taken. Enter a different username");
-            } else {
-                //TODO: Get this part working, Toast message keeps popping up regardless of successful sign up
-//                User newUser = new User(username, password);
-//                repository.insertUser(newUser);
-//                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), newUser.getId());
-//                intent.putExtra(SIGN_UP_KEY, username);
-//                startActivity(intent);
+            @Override
+            public void onChanged(User user) {
+                if (user != null) {
+                    if (userObserver != null) {
+                        toastMaker("Username already taken. Enter a different username");
+                    }
+                } else {
+                    User newUser = new User(username, password);
+                    repository.insertUser(newUser);
+                    userObserver = null;
+                    Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), newUser.getId());
+                    intent.putExtra(SIGN_UP_KEY, username);
+                    startActivity(intent);
+
+                    repository.getUserByUserName(username).removeObserver(this);
+                }
             }
-        });
+        };
+
+        repository.getUserByUserName(username).observe(Sign_Up_Page.this, userObserver);
+
     }
 
 
