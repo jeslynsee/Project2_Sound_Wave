@@ -7,16 +7,20 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverter;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.SoundWave;
 import com.example.project2_sound_wave.Login_Page;
 import com.example.project2_sound_wave.database.entities.User;
+import com.example.project2_sound_wave.database.typeConverters.ListTypeConverter;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@TypeConverters(ListTypeConverter.class)
 @Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 1, exportSchema = false)
 public abstract class SoundWaveDatabase extends RoomDatabase {
     public static final String USER_TABLE = "usertable";
@@ -60,6 +64,8 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 dao.insert(admin);
                 User testUser1 = new User("testuser1", "testuser1");
                 dao.insert(testUser1);
+
+
 
 
                 SoundWaveDAO genres = INSTANCE.soundWaveDAO();
@@ -171,24 +177,7 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 genres.insert(Artist53);
                 SoundWave Artist54 = new SoundWave("Lil Yachty", "Trap");
                 genres.insert(Artist54);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             });
-
-
         }
     };
 
