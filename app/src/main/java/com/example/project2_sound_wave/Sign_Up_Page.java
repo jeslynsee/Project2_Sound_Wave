@@ -92,7 +92,7 @@ public class Sign_Up_Page extends AppCompatActivity {
     }
 
     // created intent here, so we can start up this activity from button click in Main
-    static Intent signUpIntentFactory(Context context) {// missing String username param?
+    static Intent signUpIntentFactory(Context context) {
         Intent intent = new Intent(context, Sign_Up_Page.class);
         return intent;
     }
