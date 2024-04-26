@@ -30,11 +30,6 @@ public class Login_Page extends AppCompatActivity {
 
         repository = SoundWaveRepository.getRepository(getApplication());
 
-        String userNameFromSignUp = getIntent().getStringExtra(USERNAME_KEY);
-        if (userNameFromSignUp == null) {
-            toastMaker(userNameFromSignUp);
-        }
-
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,8 +77,6 @@ public class Login_Page extends AppCompatActivity {
 
     static Intent loginIntentFactory(Context context) {
         Intent intent = new Intent(context, Login_Page.class);
-//        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
-        // need to get User info to Options Page somehow
         return intent;
     }
 
