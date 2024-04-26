@@ -3,10 +3,12 @@ package com.example.project2_sound_wave;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.Toast;
 
 
+import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 
@@ -22,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
 
-    //TODO: add Login user information
+    SoundWaveRepository repository;
+
     private int loggedInUserId = -1;
     private User user;
 
@@ -32,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        repository = SoundWaveRepository.getRepository(getApplication());
+
         loginUser();
-        invalidateOptionsMenu();
+//        invalidateOptionsMenu();
 
 
         if (loggedInUserId == -1) {
@@ -52,8 +58,20 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginUser() {
         //TODO: Make loginUser FUNCTIONAL
-        user = new User("Jeslyn", "jeslyn");
-        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, -1);
+        loggedInUserId = user.getId();
+        if (loggedInUserId == -1) {
+            return;
+        }
+        LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
+        userObserver.observe(this, user -> {
+            this.user = user;
+            if (this.user != null) {
+                invalidateOptionsMenu();
+            } else {
+                logout();
+            }
+        });
+
     }
 
     @Override
@@ -67,6 +85,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.logoutMenuItem);
         item.setVisible(true);
+        if (user == null) {
+            return false;
+        }
         item.setTitle(user.getUsername());
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -102,7 +123,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-        //TODO: Finish logout method
+//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USER_ID_KEY, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+//        sharedPrefEditor.putInt(SHARED_PREFERENCE_USER_ID_KEY, LOGGED_OUT);
+//        getIntent().putExtra(OPTIONS_PAGE_USER_ID, LOGGED_OUT);
+//        sharedPrefEditor.apply();
+
         startActivity(Starting_Page.startingPageIntentFactory(getApplicationContext()));
     }
 
