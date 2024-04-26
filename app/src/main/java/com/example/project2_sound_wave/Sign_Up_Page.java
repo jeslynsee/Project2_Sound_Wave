@@ -1,7 +1,6 @@
 package com.example.project2_sound_wave;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
 import android.content.Context;
@@ -18,6 +17,7 @@ public class Sign_Up_Page extends AppCompatActivity {
     ActivitySignUpPageBinding binding;
     SoundWaveRepository repository;
     private Observer<User> userObserver;
+
     private static final String SIGN_UP_KEY = "com.example.project2_sound_wave.SIGN_UP_KEY";
 
     @Override
@@ -27,6 +27,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = SoundWaveRepository.getRepository(getApplication());
+
 
         //making sure sign up button listener is working
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -46,6 +47,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         });
 
     }
+
 
     private void validateFields() {
         String username = binding.userSignUpEditText.getText().toString();
@@ -68,8 +70,8 @@ public class Sign_Up_Page extends AppCompatActivity {
                     User newUser = new User(username, password);
                     repository.insertUser(newUser);
                     userObserver = null;
-                    Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), newUser.getId());
-                    intent.putExtra(SIGN_UP_KEY, username);
+                    Toast.makeText(Sign_Up_Page.this, "Successfully signed up!", Toast.LENGTH_SHORT).show();
+                    Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
                     startActivity(intent);
 
                     repository.getUserByUserName(username).removeObserver(this);
@@ -87,8 +89,10 @@ public class Sign_Up_Page extends AppCompatActivity {
     }
 
     // created intent here, so we can start up this activity from button click in Main
-    static Intent signUpIntentFactory(Context context) {
+    static Intent signUpIntentFactory(Context context) {// missing String username param?
         Intent intent = new Intent(context, Sign_Up_Page.class);
+        intent.putExtra(SIGN_UP_KEY, "Username"); // placeholder value
         return intent;
     }
+
 }

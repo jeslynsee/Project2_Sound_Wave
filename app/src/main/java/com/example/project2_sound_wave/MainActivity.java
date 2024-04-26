@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
         binding.SubmitButton.setOnClickListener(new View.OnClickListener() {
         @Override
             public void onClick(View v) {
-             Intent intent = ArtistPage.artistPageIntentFactory(getApplicationContext());
-             startActivity(intent);
+
             }
         });
     }
