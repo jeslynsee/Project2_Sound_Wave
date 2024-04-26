@@ -5,11 +5,13 @@ import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 
+import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.SoundWave;
 import com.example.project2_sound_wave.Login_Page;
 import com.example.project2_sound_wave.database.entities.User;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -67,6 +69,8 @@ public class SoundWaveRepository {
         return null;
     }
 
+
+
     public void insertSoundWave(SoundWave soundWave) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->
         {
@@ -81,6 +85,13 @@ public class SoundWaveRepository {
         });
     }
 
+    public void delete(User user) {
+        SoundWaveDatabase.databaseWriteExecutor.execute(() ->
+        {
+            userDAO.delete(user);
+        });
+    }
+
     public LiveData<User> getUserByUserName(String username) {
         return userDAO.getUserByUserName(username);
     }
@@ -88,5 +99,41 @@ public class SoundWaveRepository {
     public LiveData<User> getUserByUserId(int userId) {
         return userDAO.getUserByUserId(userId);
     }
+
+
+public LiveData<List<User>> getAllUsers() {
+    Future<LiveData<List<User>>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+            new Callable<LiveData<List<User>>>() {
+                @Override
+                public LiveData<List<User>> call() throws Exception {
+                    return userDAO.getAllUsers();
+                }
+            }
+    );
+    try {
+        return future.get();
+    } catch (InterruptedException | ExecutionException e) {
+        Log.i(Login_Page.TAG, "Problem getting all users in repository");
+    }
+    return null;
+}
+
+    public LiveData<List<String>> getAllUsernames() {
+        Future<LiveData<List<String>>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<LiveData<List<String>>>() {
+                    @Override
+                    public LiveData<List<String>> call() throws Exception {
+                        return userDAO.getAllUsernames();
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(Login_Page.TAG, "Problem getting all usernames in repository");
+        }
+        return null;
+    }
+
 
 }
