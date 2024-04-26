@@ -18,6 +18,7 @@ public class Sign_Up_Page extends AppCompatActivity {
     SoundWaveRepository repository;
     private Observer<User> userObserver;
 
+
     private static final String SIGN_UP_KEY = "com.example.project2_sound_wave.SIGN_UP_KEY";
 
     @Override
@@ -27,6 +28,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = SoundWaveRepository.getRepository(getApplication());
+
 
 
         //making sure sign up button listener is working
@@ -70,7 +72,8 @@ public class Sign_Up_Page extends AppCompatActivity {
                     User newUser = new User(username, password);
                     repository.insertUser(newUser);
                     userObserver = null;
-                    Toast.makeText(Sign_Up_Page.this, "Successfully signed up!", Toast.LENGTH_SHORT).show();
+                    toastMaker("Successfully signed up!");
+                    toastMaker("Login now to continue!");
                     Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
                     startActivity(intent);
 
@@ -91,7 +94,6 @@ public class Sign_Up_Page extends AppCompatActivity {
     // created intent here, so we can start up this activity from button click in Main
     static Intent signUpIntentFactory(Context context) {// missing String username param?
         Intent intent = new Intent(context, Sign_Up_Page.class);
-        intent.putExtra(SIGN_UP_KEY, "Username"); // placeholder value
         return intent;
     }
 
