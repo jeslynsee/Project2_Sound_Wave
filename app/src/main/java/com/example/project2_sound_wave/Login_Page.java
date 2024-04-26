@@ -77,6 +77,8 @@ public class Login_Page extends AppCompatActivity {
 
     static Intent loginIntentFactory(Context context) {
         Intent intent = new Intent(context, Login_Page.class);
+//        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
+        // need to get User info to Options Page somehow
         return intent;
     }
 
