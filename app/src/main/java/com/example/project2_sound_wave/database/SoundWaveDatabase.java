@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(ListTypeConverter.class)
-@Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 1, exportSchema = false)
+@Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 2, exportSchema = false)
 public abstract class SoundWaveDatabase extends RoomDatabase {
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "SoundWavedatabase";

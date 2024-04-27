@@ -50,6 +50,7 @@
     <string name="delete_genre">delete_genre</string>
     <string name="based_on_your_selections_we_recomend_these_artists">Based on your selections we recomend these artists!</string>
     <string name="artists">artists</string>
+    <string name="view_playlist">View Playlist</string>
 
 
 </resources>
