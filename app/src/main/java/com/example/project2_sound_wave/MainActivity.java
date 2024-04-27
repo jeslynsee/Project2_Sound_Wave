@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -21,6 +23,9 @@ import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
+    Button Altbutton;
+    String selectedAltArtist = "Gorillaz";
+
 
     //TODO: add Login user information
     private int loggedInUserId = -1;
@@ -31,6 +36,44 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Altbutton = findViewById(R.id.Button1);
+        Altbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOptionsDialog();
+
+            }
+            private void showOptionsDialog() {
+                String [] AltArtists  ={"Tame Impala", "Gorillaz", "Red Hot Chili Peppers"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Select Artist");
+                builder.setSingleChoiceItems(AltArtists, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectedAltArtist = AltArtists[which];
+                        Toast.makeText(MainActivity.this, "You Picked: " + selectedAltArtist, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+                builder.show();
+            }
+        });
+
+
 
         loginUser();
         invalidateOptionsMenu();
@@ -41,14 +84,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        binding.SubmitButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-            public void onClick(View v) {
-             Intent intent = ArtistPage.artistPageIntentFactory(getApplicationContext());
-             startActivity(intent);
-            }
-        });
+//        binding.SubmitButton.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//            public void onClick(View v) {
+//             Intent intent = ArtistPage.artistPageIntentFactory(getApplicationContext());
+//             startActivity(intent);
+//            }
+//        });
+
+
+
     }
+
+
 
     private void loginUser() {
         //TODO: Make loginUser FUNCTIONAL
@@ -112,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
+
 
 
 }
