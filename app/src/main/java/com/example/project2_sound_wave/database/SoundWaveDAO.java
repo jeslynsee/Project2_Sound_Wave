@@ -12,8 +12,11 @@ import java.util.List;
 @Dao
 public interface SoundWaveDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(SoundWave soundWave);
+    void insert(SoundWave... soundWave);
 
     @Query("Select * from " + SoundWaveDatabase.SOUND_WAVE_TABLE)
     List<SoundWave> getAllRecords();
+
+    @Query("DELETE from " + SoundWaveDatabase.SOUND_WAVE_TABLE)
+    void deleteAll();
 }
