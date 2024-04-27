@@ -71,6 +71,14 @@ public class Options_Page extends AppCompatActivity {
             }
         });
 
+        binding.browseByGenreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
