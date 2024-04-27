@@ -3,30 +3,31 @@ package com.example.project2_sound_wave;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
-import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
+    Button Altbutton;
+    String selectedAltArtist = "Gorillaz";
 
-    SoundWaveRepository repository;
 
+    //TODO: add Login user information
     private int loggedInUserId = -1;
     private User user;
 
@@ -35,11 +36,47 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Altbutton = findViewById(R.id.Button1);
+        Altbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOptionsDialog();
 
-        repository = SoundWaveRepository.getRepository(getApplication());
+            }
+            private void showOptionsDialog() {
+                String [] AltArtists  ={"Tame Impala", "Gorillaz", "Red Hot Chili Peppers"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Select Artist");
+                builder.setSingleChoiceItems(AltArtists, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectedAltArtist = AltArtists[which];
+                        Toast.makeText(MainActivity.this, "You Picked: " + selectedAltArtist, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+                builder.show();
+            }
+        });
+
+
 
         loginUser();
-//        invalidateOptionsMenu();
+        invalidateOptionsMenu();
 
 
         if (loggedInUserId == -1) {
@@ -47,30 +84,24 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        binding.SubmitButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-            public void onClick(View v) {
+//        binding.SubmitButton.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//            public void onClick(View v) {
+//             Intent intent = ArtistPage.artistPageIntentFactory(getApplicationContext());
+//             startActivity(intent);
+//            }
+//        });
 
-            }
-        });
+
+
     }
+
+
 
     private void loginUser() {
         //TODO: Make loginUser FUNCTIONAL
-        loggedInUserId = user.getId();
-        if (loggedInUserId == -1) {
-            return;
-        }
-        LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
-        userObserver.observe(this, user -> {
-            this.user = user;
-            if (this.user != null) {
-                invalidateOptionsMenu();
-            } else {
-                logout();
-            }
-        });
-
+        user = new User("Jeslyn", "jeslyn");
+        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, -1);
     }
 
     @Override
@@ -84,9 +115,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem item = menu.findItem(R.id.logoutMenuItem);
         item.setVisible(true);
-        if (user == null) {
-            return false;
-        }
         item.setTitle(user.getUsername());
         item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -122,20 +150,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void logout() {
-//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USER_ID_KEY, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-//        sharedPrefEditor.putInt(SHARED_PREFERENCE_USER_ID_KEY, LOGGED_OUT);
-//        getIntent().putExtra(OPTIONS_PAGE_USER_ID, LOGGED_OUT);
-//        sharedPrefEditor.apply();
-
+        //TODO: Finish logout method
         startActivity(Starting_Page.startingPageIntentFactory(getApplicationContext()));
     }
+
 
     static Intent mainActivityIntentFactory(Context context, int userId) {
         Intent intent = new Intent(context, MainActivity.class);
         intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
     }
+
 
 
 }
