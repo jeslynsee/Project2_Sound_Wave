@@ -23,8 +23,10 @@ import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
-    Button Altbutton;
+    Button button;
     String selectedAltArtist = "Gorillaz";
+    String selectedBluesArtist = "B.B. King";
+    String selectedChillArtist = "Jaden";
 
 
     //TODO: add Login user information
@@ -36,8 +38,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        Altbutton = findViewById(R.id.Button1);
-        Altbutton.setOnClickListener(new View.OnClickListener() {
+        button = findViewById(R.id.Button1);
+        button = findViewById(R.id.Button2);
+        button = findViewById(R.id.Button3);
+
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showOptionsDialog();
@@ -52,6 +57,78 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         selectedAltArtist = AltArtists[which];
                         Toast.makeText(MainActivity.this, "You Picked: " + selectedAltArtist, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOptionsDialog();
+
+            }
+            private void showOptionsDialog() {
+                String [] BluesArtists  ={"Ray Charles", "Stevie Ray Vaughan", "B.B. King"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Select Artist");
+                builder.setSingleChoiceItems(BluesArtists, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectedBluesArtist = BluesArtists[which];
+                        Toast.makeText(MainActivity.this, "You Picked: " + selectedBluesArtist, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+                builder.show();
+            }
+        });
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showOptionsDialog();
+
+            }
+            private void showOptionsDialog() {
+                String [] ChillArtists  ={"Mac Miller", "Jaden", "AUTUMN XO"};
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Select Artist");
+                builder.setSingleChoiceItems(ChillArtists, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        selectedChillArtist = ChillArtists[which];
+                        Toast.makeText(MainActivity.this, "You Picked: " + selectedChillArtist, Toast.LENGTH_SHORT).show();
                     }
                 });
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
