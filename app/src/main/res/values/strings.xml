@@ -49,4 +49,6 @@
     <string name="add_user">Add User</string>
     <string name="delete_genre">Delete Genre</string>
     <string name="add_genre">Add Genre</string>
+    <string name="preference_file_key">PreferenceFileNameSoundWave</string>
+    <string name="preference_userId_key">PreferenceUserIdKeySoundWave</string>
 </resources>
