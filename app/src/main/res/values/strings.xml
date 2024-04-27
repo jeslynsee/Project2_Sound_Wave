@@ -51,4 +51,6 @@
     <string name="add_genre">Add Genre</string>
     <string name="preference_file_key">PreferenceFileNameSoundWave</string>
     <string name="preference_userId_key">PreferenceUserIdKeySoundWave</string>
+    <string name="view_playlist"> View Playlist </string>
+    <string name="browse_by_genre">Browse By Genre</string>
 </resources>

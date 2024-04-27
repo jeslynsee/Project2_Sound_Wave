@@ -21,4 +21,6 @@ public class Browse_Artists_Page extends AppCompatActivity {
         Intent intent = new Intent(context, Browse_Artists_Page.class);
         return intent;
     }
+
+
 }
