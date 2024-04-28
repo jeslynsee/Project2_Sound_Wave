@@ -22,7 +22,9 @@ import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
-    Button button;
+    Button Altbutton;
+    Button Bluesbutton;
+    Button Chillbutton;
     String selectedAltArtist = "Gorillaz";
     String selectedBluesArtist = "B.B. King";
     String selectedChillArtist = "Jaden";
@@ -37,11 +39,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        button = findViewById(R.id.Button1);
-        button = findViewById(R.id.Button2);
-        button = findViewById(R.id.Button3);
+        Altbutton = findViewById(R.id.Button1);
+        Bluesbutton = findViewById(R.id.Button2);
+        Chillbutton = findViewById(R.id.Button3);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        Altbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showOptionsDialog();
@@ -77,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        Bluesbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showOptionsDialog();
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
+        Chillbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showOptionsDialog();
