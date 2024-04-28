@@ -97,7 +97,7 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 genres.insert(Artist11);
                 SoundWave Artist12 = new SoundWave("Beethoven", "Classical");
                 genres.insert(Artist12);
-                SoundWave Artist13 = new SoundWave("Jphnny Cash", "Country");
+                SoundWave Artist13 = new SoundWave("Johnny Cash", "Country");
                 genres.insert(Artist13);
                 SoundWave Artist14 = new SoundWave("Taylor Swift", "Country");
                 genres.insert(Artist14);
