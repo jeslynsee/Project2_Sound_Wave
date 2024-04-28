@@ -177,6 +177,8 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 genres.insert(Artist53);
                 SoundWave Artist54 = new SoundWave("Lil Yachty", "Trap");
                 genres.insert(Artist54);
+
+                //TODO: Need to prepopulate playlist table with predefined user's usernames
             });
         }
     };

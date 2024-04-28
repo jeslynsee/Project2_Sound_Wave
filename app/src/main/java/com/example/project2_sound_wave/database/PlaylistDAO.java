@@ -23,4 +23,6 @@ public interface PlaylistDAO {
     @Query("SELECT * FROM " + SoundWaveDatabase.PLAYLIST_TABLE + " ORDER BY username")
     LiveData<List<Playlist>> getAllPlaylists();
 
+    //TODO: Get playlist by username
+
 }

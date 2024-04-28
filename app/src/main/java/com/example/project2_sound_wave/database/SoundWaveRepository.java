@@ -135,5 +135,22 @@ public LiveData<List<User>> getAllUsers() {
         return null;
     }
 
+    public LiveData<String> getUserNameByUserId(int userId) {
+        Future<LiveData<String>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<LiveData<String>>() {
+                    @Override
+                    public LiveData<String> call() throws Exception {
+                        return userDAO.getUserNameByUserId(userId);
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(Login_Page.TAG, "Problem getting username in repository");
+        }
+        return null;
+    }
+
 
 }
