@@ -19,4 +19,5 @@ public interface SoundWaveDAO {
 
     @Query("DELETE from " + SoundWaveDatabase.SOUND_WAVE_TABLE)
     void deleteAll();
+
 }

@@ -95,7 +95,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String usernameToDelete = editText.getText().toString();
                 if (usernameToDelete.isEmpty()) {
-                    Toast.makeText(Admin_Settings_Page.this, "Please enter a user to delete", Toast.LENGTH_SHORT).show();
+                    toastMaker("Please enter a user to delete");
                     return;
                 }
 
@@ -106,7 +106,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
                             showConfirmationDialog(user);
                         } else {
                             if (userObserver != null) {
-                                Toast.makeText(Admin_Settings_Page.this, "User not found", Toast.LENGTH_SHORT).show();
+                               toastMaker("User not found");
                             }
                         }
                     }
@@ -133,7 +133,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
                 repository.delete(user);
                 repository.getUserByUserName(user.getUsername()).removeObserver(userObserver);
                 userObserver = null;
-                Toast.makeText(Admin_Settings_Page.this, "User successfully deleted", Toast.LENGTH_SHORT).show();
+                toastMaker("User successfully deleted");
                 dialog.dismiss();
             }
         });

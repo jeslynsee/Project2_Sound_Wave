@@ -61,7 +61,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         }
 
         userObserver = new Observer<User>() {
-
+        //TODO: Make a playlist with their username attached to it
             @Override
             public void onChanged(User user) {
                 if (user != null) {
