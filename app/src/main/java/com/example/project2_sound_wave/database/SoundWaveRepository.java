@@ -92,17 +92,11 @@ public class SoundWaveRepository {
         });
     }
 
-    public void insertArtist(Playlist playlist, String artist) {
-        SoundWaveDatabase.databaseWriteExecutor.execute(() -> {
-            List<String> artists = playlist.getArtists();
-            artists.add(artist);
-        });
-    }
+    public void updatePlaylistWithArtistAndGenre(String username, List<String> artist, List<String> genres) {
+        SoundWaveDatabase.databaseWriteExecutor.execute(() ->
+        {
+            LiveData<Playlist> playlist = playlistDAO.getPlaylistByUserName(username);
 
-    public void insertGenre(Playlist playlist, String genre) {
-        SoundWaveDatabase.databaseWriteExecutor.execute(() -> {
-            List<String> genres = playlist.getGenres();
-            genres.add(genre);
         });
     }
 
@@ -203,6 +197,8 @@ public LiveData<List<User>> getAllUsers() {
         }
         return null;
     }
+
+
 
 
 }

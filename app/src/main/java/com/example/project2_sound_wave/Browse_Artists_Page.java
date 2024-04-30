@@ -75,8 +75,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
         alertBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addArtistToUserPlaylist();
-                toastMaker("Successfully added artist to playlist!");
+                addArtistToUserPlaylist(artist);
             }
         });
 
@@ -91,24 +90,30 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
     }
 
-    private void addArtistToUserPlaylist() {
-//         int userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
-//         LiveData<String> username = repository.getUserNameByUserId(userId);
-//
-//         LiveData<Playlist> playlist = repository.getPlaylistByUserName(username.getValue());
-//
-//
-//         //TODO: Add song to User's playlist and figure out what cases need to be caught (error checks)
+    private void addArtistToUserPlaylist(String artist) {
+         int userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
+         LiveData<String> username = repository.getUserNameByUserId(userId);
+
+         LiveData<Playlist> playlist = repository.getPlaylistByUserName(username.getValue());
+
+//        repository.insertArtist(artist);
+        toastMaker("Successfully added artist to playlist!");
+
+         //TODO: Add song to User's playlist and figure out what cases need to be caught (error checks)
 //        Observer<Playlist> playlistObserver = new Observer<Playlist>() {
 //            @Override
 //            public void onChanged(Playlist playlist) {
 //                toastMaker("Entering playlist Observer");
-//                LiveData<Playlist> currentPlaylist = repository.getPlaylistByUserName(String.valueOf(username));
-//                toastMaker(String.valueOf(username));
-//
+//                List<String> artists = playlist.getArtists();
+//                artists.add(artist);
+//                toastMaker("Successfully added artist");
 //            }
 //        };
+//        repository.getPlaylistByUserName(username.getValue()).observe(Browse_Artists_Page.this, playlistObserver);
     }
+
+
+
 
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
