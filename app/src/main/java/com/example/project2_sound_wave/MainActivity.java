@@ -26,26 +26,26 @@ public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
 
-    Button Altbutton;
-    Button Bluesbutton;
-    Button Chillbutton;
+    Button Altbutton = findViewById(R.id.Button1);
+    Button Bluesbutton = findViewById(R.id.Button2);
+    Button Chillbutton = findViewById(R.id.Button3);
 
-    Button Classicalbutton;
-    Button Countrybutton;
-    Button Electronicbutton;
-    Button Folkbutton;
-    Button HipHopbutton;
-    Button Indiebutton;
-    Button Jazzbutton;
-    Button Latinbutton;
-    Button Metalbutton;
-    Button Operabutton;
-    Button Psychedelicbutton;
+    Button Classicalbutton = findViewById(R.id.Button4);
+    Button Countrybutton = findViewById(R.id.Button5);
+    Button Electronicbutton = findViewById(R.id.Button6);
+    Button Folkbutton = findViewById(R.id.Button7);
+    Button HipHopbutton = findViewById(R.id.Button8);
+    Button Indiebutton = findViewById(R.id.Button9);
+    Button Jazzbutton = findViewById(R.id.Button10);
+    Button Latinbutton = findViewById(R.id.Button11);
+    Button Metalbutton = findViewById(R.id.Button12);
+    Button Operabutton = findViewById(R.id.Button13);
+    Button Psychedelicbutton = findViewById(R.id.Button14);
 
-    Button Rapbutton;
-    Button RandBbutton;
-    Button Soulbutton;
-    Button Trapbutton;
+    Button Rapbutton = findViewById(R.id.Button15);
+    Button RandBbutton = findViewById(R.id.Button16);
+    Button Soulbutton = findViewById(R.id.Button17);
+    Button Trapbutton = findViewById(R.id.Button18);
 
     String selectedAltArtist = "Gorillaz";
     String selectedBluesArtist = "B.B. King";
