@@ -23,6 +23,9 @@ public interface PlaylistDAO {
     @Query("SELECT * FROM " + SoundWaveDatabase.PLAYLIST_TABLE + " ORDER BY username")
     LiveData<List<Playlist>> getAllPlaylists();
 
-    //TODO: Get playlist by username
+    @Query("SELECT * FROM " + SoundWaveDatabase.PLAYLIST_TABLE + " WHERE username = :username")
+    LiveData<Playlist> getPlaylistByUserName(String username);
 
+    @Query("DELETE from " + SoundWaveDatabase.PLAYLIST_TABLE)
+    void deleteAll();
 }

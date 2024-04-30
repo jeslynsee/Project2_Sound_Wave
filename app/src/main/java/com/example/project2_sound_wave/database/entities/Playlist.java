@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity(tableName = SoundWaveDatabase.PLAYLIST_TABLE)
 public class Playlist {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private List<String> artists;

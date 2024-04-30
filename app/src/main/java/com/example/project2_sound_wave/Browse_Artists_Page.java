@@ -23,6 +23,7 @@ import com.example.project2_sound_wave.databinding.ActivityBrowseArtistsPageBind
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Browse_Artists_Page extends AppCompatActivity {
     ActivityBrowseArtistsPageBinding binding;
@@ -30,7 +31,6 @@ public class Browse_Artists_Page extends AppCompatActivity {
     private static final String BROWSE_ARTISTS_KEY = "com.example.project2_sound_wave.BROWSE_ARTISTS_KEY";
 
     SoundWaveRepository repository;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +76,8 @@ public class Browse_Artists_Page extends AppCompatActivity {
         alertBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                toastMaker("Successfully added artist to playlist!");
                 addArtistToUserPlaylist();
+                toastMaker("Successfully added artist to playlist!");
             }
         });
 
@@ -93,15 +93,19 @@ public class Browse_Artists_Page extends AppCompatActivity {
     }
 
     private void addArtistToUserPlaylist() {
-         int userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
-         LiveData<User> user = repository.getUserByUserId(userId);
-         //TODO: Add song to User's playlist and figure out what cases need to be caught (error checks)
+//         int userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
+//         LiveData<String> username = repository.getUserNameByUserId(userId);
+//
+//         LiveData<Playlist> playlist = repository.getPlaylistByUserName(username.getValue());
+//
+//
+//         //TODO: Add song to User's playlist and figure out what cases need to be caught (error checks)
 //        Observer<Playlist> playlistObserver = new Observer<Playlist>() {
 //            @Override
 //            public void onChanged(Playlist playlist) {
-//                if (playlist.getUsername().equals(repository.getUserNameByUserId(userId))) {
-//
-//                }
+//                toastMaker("Entering playlist Observer");
+//                LiveData<Playlist> currentPlaylist = repository.getPlaylistByUserName(String.valueOf(username));
+//                toastMaker(String.valueOf(username));
 //            }
 //        };
     }

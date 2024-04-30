@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.project2_sound_wave.database.SoundWaveRepository;
+import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivitySignUpPageBinding;
+
+import java.util.ArrayList;
 
 public class Sign_Up_Page extends AppCompatActivity {
     ActivitySignUpPageBinding binding;
@@ -71,6 +74,11 @@ public class Sign_Up_Page extends AppCompatActivity {
                 } else {
                     User newUser = new User(username, password);
                     repository.insertUser(newUser);
+                    Playlist newPlaylist = new Playlist();
+                    newPlaylist.setUsername(username);
+                    newPlaylist.setArtists(new ArrayList<>());
+                    newPlaylist.setGenres(new ArrayList<>());
+                    repository.insertPlaylist(newPlaylist);
                     userObserver = null;
                     toastMaker("Successfully signed up!");
                     toastMaker("Login now to continue!");
