@@ -85,10 +85,39 @@ public class SoundWaveRepository {
         });
     }
 
+    public void insertPlaylist(Playlist... playlist) {
+        SoundWaveDatabase.databaseWriteExecutor.execute(() ->
+        {
+            playlistDAO.insert(playlist);
+        });
+    }
+
+    public void updatePlaylistWithArtistAndGenre(String username, List<String> artist, List<String> genres) {
+        SoundWaveDatabase.databaseWriteExecutor.execute(() ->
+        {
+            LiveData<Playlist> playlist = playlistDAO.getPlaylistByUserName(username);
+
+        });
+    }
+
     public void delete(User user) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->
         {
             userDAO.delete(user);
+        });
+    }
+
+    public void delete(SoundWave soundWave) {
+        SoundWaveDatabase.databaseWriteExecutor.execute(() ->
+        {
+            soundWaveDAO.delete(soundWave);
+        });
+    }
+
+    public void delete(Playlist playlist) {
+        SoundWaveDatabase.databaseWriteExecutor.execute(() ->
+        {
+            playlistDAO.delete(playlist);
         });
     }
 
@@ -134,6 +163,42 @@ public LiveData<List<User>> getAllUsers() {
         }
         return null;
     }
+
+    public LiveData<String> getUserNameByUserId(int userId) {
+        Future<LiveData<String>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<LiveData<String>>() {
+                    @Override
+                    public LiveData<String> call() throws Exception {
+                        return userDAO.getUserNameByUserId(userId);
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(Login_Page.TAG, "Problem getting username in repository");
+        }
+        return null;
+    }
+
+    public LiveData<Playlist> getPlaylistByUserName(String username) {
+        Future<LiveData<Playlist>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<LiveData<Playlist>>() {
+                    @Override
+                    public LiveData<Playlist> call() throws Exception {
+                        return playlistDAO.getPlaylistByUserName(username);
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(Login_Page.TAG, "Problem getting playlist in repository");
+        }
+        return null;
+    }
+
+
 
 
 }

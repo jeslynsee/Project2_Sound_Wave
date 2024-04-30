@@ -10,7 +10,7 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_up_buttonLabel">Sign Up!</string>
     <string name="soundwave">SoundWave</string>
-    <string name="music_for_you">Music for YOU</string>
+    <string name="artists_for_you">Artists for YOU</string>
     <string name="get_started_by">Get started by...</string>
     <string name="create_an_account">Create an account</string>
     <string name="or">or</string>
@@ -44,13 +44,14 @@
     <string name="delete_users">Delete Users</string>
     <string name="admin">Admin</string>
     <string name="admin_settings">Admin Settings</string>
-    <string name="add_user">add_user</string>
-    <string name="add_genre">add_genre</string>
-    <string name="delete_user">delete_user</string>
-    <string name="delete_genre">delete_genre</string>
-    <string name="based_on_your_selections_we_recomend_these_artists">Based on your selections we recomend these artists!</string>
-    <string name="artists">artists</string>
-    <string name="view_playlist">View Playlist</string>
-
-
+    <string name="artists">Artists</string>
+    <string name="delete_user">Delete User</string>
+    <string name="add_user">Add User</string>
+    <string name="delete_genre">Delete Genre</string>
+    <string name="add_genre">Add Genre</string>
+    <string name="preference_file_key">PreferenceFileNameSoundWave</string>
+    <string name="preference_userId_key">PreferenceUserIdKeySoundWave</string>
+    <string name="view_playlist"> View Playlist </string>
+    <string name="browse_by_genre">Browse By Genre</string>
+    <string name="plus_icon">Plus Icon</string>
 </resources>

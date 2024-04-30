@@ -1,7 +1,7 @@
 package com.example.project2_sound_wave;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,12 +10,18 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.project2_sound_wave.database.SoundWaveRepository;
+import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivitySignUpPageBinding;
+
+import java.util.ArrayList;
 
 public class Sign_Up_Page extends AppCompatActivity {
     ActivitySignUpPageBinding binding;
     SoundWaveRepository repository;
+    private Observer<User> userObserver;
+
+
     private static final String SIGN_UP_KEY = "com.example.project2_sound_wave.SIGN_UP_KEY";
 
     @Override
@@ -25,6 +31,8 @@ public class Sign_Up_Page extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         repository = SoundWaveRepository.getRepository(getApplication());
+
+
 
         //making sure sign up button listener is working
         binding.signUpButton.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +53,7 @@ public class Sign_Up_Page extends AppCompatActivity {
 
     }
 
+
     private void validateFields() {
         String username = binding.userSignUpEditText.getText().toString();
         String password = binding.passwordSignUpEditText.getText().toString();
@@ -54,20 +63,35 @@ public class Sign_Up_Page extends AppCompatActivity {
             return;
         }
 
-        LiveData<User> userObserver = repository.getUserByUserName(username);
-        userObserver.observe(this, user -> {
+        userObserver = new Observer<User>() {
+        //TODO: Make a playlist with their username attached to it
+            @Override
+            public void onChanged(User user) {
+                if (user != null) {
+                    if (userObserver != null) {
+                        toastMaker("Username already taken. Enter a different username");
+                    }
+                } else {
+                    User newUser = new User(username, password);
+                    repository.insertUser(newUser);
+                    Playlist newPlaylist = new Playlist();
+                    newPlaylist.setUsername(username);
+                    newPlaylist.setArtists(new ArrayList<>());
+                    newPlaylist.setGenres(new ArrayList<>());
+                    repository.insertPlaylist(newPlaylist);
+                    userObserver = null;
+                    toastMaker("Successfully signed up!");
+                    toastMaker("Login now to continue!");
+                    Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
+                    startActivity(intent);
 
-            if (user != null) {
-                toastMaker("Username already taken. Enter a different username");
-            } else {
-                //TODO: Get this part working, Toast message keeps popping up regardless of successful sign up
-//                User newUser = new User(username, password);
-//                repository.insertUser(newUser);
-//                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext(), newUser.getId());
-//                intent.putExtra(SIGN_UP_KEY, username);
-//                startActivity(intent);
+                    repository.getUserByUserName(username).removeObserver(this);
+                }
             }
-        });
+        };
+
+        repository.getUserByUserName(username).observe(Sign_Up_Page.this, userObserver);
+
     }
 
 
@@ -80,4 +104,5 @@ public class Sign_Up_Page extends AppCompatActivity {
         Intent intent = new Intent(context, Sign_Up_Page.class);
         return intent;
     }
+
 }

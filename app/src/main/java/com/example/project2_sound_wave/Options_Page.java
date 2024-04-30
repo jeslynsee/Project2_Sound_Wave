@@ -24,7 +24,6 @@ public class Options_Page extends AppCompatActivity {
     static final String SHARED_PREFERENCE_USER_ID_KEY = "com.example.project2_sound_wave.SHARED_PREFERENCE_USER_ID_KEY";
     public static final String TAG = "SOUNDWAVE";
     private static final int LOGGED_OUT = -1;
-    private static final String SHARED_PREFERENCE_USER_ID_VALUE = "com.example.project2_sound_wave.SHARED_PREFERENCE_USER_ID_VALUE";
     private static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.project2_sound_wave.SAVED_INSTANCE_STATE_USERID_KEY";
     ActivityOptionsPageBinding binding;
 
@@ -72,6 +71,14 @@ public class Options_Page extends AppCompatActivity {
             }
         });
 
+        binding.browseByGenreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = MainActivity.mainActivityIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
+
         binding.adminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,12 +90,12 @@ public class Options_Page extends AppCompatActivity {
 
 
     private void loginUser(Bundle savedInstanceState) {
-        //check for shared preference
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USER_ID_KEY,
+        //check shared preference for logged in user, read from file
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),
                 Context.MODE_PRIVATE);
-        if (sharedPreferences.contains(SHARED_PREFERENCE_USER_ID_VALUE)) {
-            loggedInUserId = sharedPreferences.getInt(SHARED_PREFERENCE_USER_ID_VALUE, LOGGED_OUT);
-        }
+
+        loggedInUserId = sharedPreferences.getInt(getString(R.string.preference_userId_key), LOGGED_OUT);
+
         if (loggedInUserId == LOGGED_OUT && savedInstanceState != null && savedInstanceState.containsKey(SAVED_INSTANCE_STATE_USERID_KEY)) {
             loggedInUserId = savedInstanceState.getInt(SAVED_INSTANCE_STATE_USERID_KEY, LOGGED_OUT);
         }
@@ -122,9 +129,6 @@ public class Options_Page extends AppCompatActivity {
         SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
         sharedPrefEditor.putInt(Options_Page.SHARED_PREFERENCE_USER_ID_KEY, loggedInUserId);
         sharedPrefEditor.apply();
-//        if (!sharedPrefEditor.commit()) {
-//            Log.d(TAG, "didn't save");
-//        }
     }
 
     @Override
@@ -176,13 +180,19 @@ public class Options_Page extends AppCompatActivity {
     }
 
     private void logout() {
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_USER_ID_KEY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(SHARED_PREFERENCE_USER_ID_KEY, LOGGED_OUT);
+        loggedInUserId = LOGGED_OUT;
+        updateSharedPreference();
         getIntent().putExtra(OPTIONS_PAGE_USER_ID, LOGGED_OUT);
-        sharedPrefEditor.apply();
 
         startActivity(Starting_Page.startingPageIntentFactory(getApplicationContext()));
+    }
+
+    private void updateSharedPreference() {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(getString(R.string.preference_userId_key), loggedInUserId);
+        sharedPrefEditor.apply();
     }
 
     static Intent optionsPageIntentFactory(Context context, int userId) {

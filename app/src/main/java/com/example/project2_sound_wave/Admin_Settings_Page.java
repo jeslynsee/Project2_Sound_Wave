@@ -29,6 +29,7 @@ import java.util.Objects;
 public class Admin_Settings_Page extends AppCompatActivity {
     ActivityAdminSettingsPageBinding binding;
     SoundWaveRepository repository;
+    private Observer<User> userObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
         dialogLayout.addView(scrollView); // Add ScrollView to the dialog layout
 
         LiveData<List<String>> allUsernames = repository.getAllUsernames();
+
         allUsernames.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> usernames) {
@@ -93,20 +95,25 @@ public class Admin_Settings_Page extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 String usernameToDelete = editText.getText().toString();
                 if (usernameToDelete.isEmpty()) {
-                    Toast.makeText(Admin_Settings_Page.this, "Please enter a user to delete", Toast.LENGTH_SHORT).show();
+                    toastMaker("Please enter a user to delete");
                     return;
                 }
 
-                repository.getUserByUserName(usernameToDelete).observe(Admin_Settings_Page.this, new Observer<User>() {
+                userObserver = new Observer<User>() {
                     @Override
                     public void onChanged(User user) {
                         if (user != null) {
                             showConfirmationDialog(user);
                         } else {
-                            Toast.makeText(Admin_Settings_Page.this, "User not found", Toast.LENGTH_SHORT).show();
+                            if (userObserver != null) {
+                               toastMaker("User not found");
+                            }
                         }
                     }
-                });
+                };
+
+                repository.getUserByUserName(usernameToDelete).observe(Admin_Settings_Page.this, userObserver);
+
             }
         });
         alertBuilder.setNegativeButton("Cancel", null);
@@ -124,7 +131,10 @@ public class Admin_Settings_Page extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 repository.delete(user);
-                Toast.makeText(Admin_Settings_Page.this, "User successfully deleted", Toast.LENGTH_SHORT).show();
+                repository.getUserByUserName(user.getUsername()).removeObserver(userObserver);
+                userObserver = null;
+                toastMaker("User successfully deleted");
+                dialog.dismiss();
             }
         });
 
@@ -137,6 +147,10 @@ public class Admin_Settings_Page extends AppCompatActivity {
 
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
+    }
+
+    private void toastMaker(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 

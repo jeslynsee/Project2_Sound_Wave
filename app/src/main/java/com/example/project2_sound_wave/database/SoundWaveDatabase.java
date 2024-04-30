@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -11,17 +12,21 @@ import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.project2_sound_wave.Browse_Artists_Page;
+import com.example.project2_sound_wave.Options_Page;
 import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.SoundWave;
 import com.example.project2_sound_wave.Login_Page;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.database.typeConverters.ListTypeConverter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @TypeConverters(ListTypeConverter.class)
-@Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 2, exportSchema = false)
+@Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 7, exportSchema = false)
 public abstract class SoundWaveDatabase extends RoomDatabase {
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "SoundWavedatabase";
@@ -65,10 +70,9 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 User testUser1 = new User("testuser1", "testuser1");
                 dao.insert(testUser1);
 
-
-
-
                 SoundWaveDAO genres = INSTANCE.soundWaveDAO();
+                Log.i(Login_Page.TAG, "SoundWave DAO initialized!");
+                genres.deleteAll();
                 SoundWave Artist1 = new SoundWave("Tame Impala", "Alt");
                 genres.insert(Artist1);
                 SoundWave Artist2 = new SoundWave("Red Hot Chili Peppers", "Alt");
@@ -177,6 +181,24 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 genres.insert(Artist53);
                 SoundWave Artist54 = new SoundWave("Lil Yachty", "Trap");
                 genres.insert(Artist54);
+
+
+                PlaylistDAO playlistDAO = INSTANCE.playlistDAO();
+                playlistDAO.deleteAll();
+
+                Playlist adminPlaylist = new Playlist();
+                adminPlaylist.setUsername(admin.getUsername());
+                adminPlaylist.setArtists(new ArrayList<>());
+                adminPlaylist.setGenres(new ArrayList<>());
+
+                Playlist testPlaylist = new Playlist();
+                testPlaylist.setUsername(testUser1.getUsername());
+                testPlaylist.setArtists(new ArrayList<>());
+                testPlaylist.setGenres(new ArrayList<>());
+
+                playlistDAO.insert(adminPlaylist);
+                playlistDAO.insert(testPlaylist);
+
             });
         }
     };
