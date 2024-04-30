@@ -65,7 +65,6 @@ public class Browse_Artists_Page extends AppCompatActivity {
             artistList.addView(artistView);
         }
 
-        //TODO: add artist to playlist (different method) with alert dialog when image button gets clicked on
     }
 
     private void showAddArtistDialog(String artist) {
@@ -106,6 +105,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
 //                toastMaker("Entering playlist Observer");
 //                LiveData<Playlist> currentPlaylist = repository.getPlaylistByUserName(String.valueOf(username));
 //                toastMaker(String.valueOf(username));
+//                
 //            }
 //        };
     }
