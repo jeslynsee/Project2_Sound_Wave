@@ -2,12 +2,15 @@ package com.example.project2_sound_wave.database.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 
 import com.example.project2_sound_wave.database.SoundWaveDatabase;
+import com.example.project2_sound_wave.database.typeConverters.ListTypeConverter;
 
 import java.util.List;
 
+@TypeConverters(ListTypeConverter.class)
 @Entity(tableName = SoundWaveDatabase.PLAYLIST_TABLE)
 public class Playlist {
     @PrimaryKey(autoGenerate = true)
