@@ -105,7 +105,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
 //                toastMaker("Entering playlist Observer");
 //                LiveData<Playlist> currentPlaylist = repository.getPlaylistByUserName(String.valueOf(username));
 //                toastMaker(String.valueOf(username));
-//                
+//
 //            }
 //        };
     }
