@@ -47,8 +47,7 @@ public class Starting_Page extends AppCompatActivity {
         });
     }
 
-    //TODO: Check sharee preferences, make it functional
-// need to check sharedPreferences here to make sure user is still not logged in
+
 private void loginUser(Bundle savedInstanceState) {
     //check shared preference for logged in user, read from file
     SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),
@@ -62,20 +61,10 @@ private void loginUser(Bundle savedInstanceState) {
     if (loggedInUserId == LOGGED_OUT) {
         loggedInUserId = getIntent().getIntExtra(STARTING_PAGE_USER_ID, LOGGED_OUT);
     }
-    if(loggedInUserId == LOGGED_OUT) {
-        return;
+    if(loggedInUserId != LOGGED_OUT) {
+        Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), loggedInUserId);
+        startActivity(intent);
     }
-//    LiveData<User> userObserver = repository.getUserByUserId(loggedInUserId);
-//    userObserver.observe(this, user -> {
-//        this.user = user;
-//        if (this.user != null) {
-//            if (this.user.isAdmin()) {
-//                binding.adminButton.setVisibility(View.VISIBLE);
-//            }
-//            invalidateOptionsMenu();
-//        }
-//    });
-
 }
 
     public static Intent startingPageIntentFactory(Context context) {
