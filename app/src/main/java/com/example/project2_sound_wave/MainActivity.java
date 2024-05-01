@@ -743,6 +743,13 @@ public class MainActivity extends AppCompatActivity {
                 builder.show();
             }
         });
+        binding.PlaylistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = User_Playlist_Page.userPlaylistIntentFactory(getApplicationContext());
+                startActivity(intent);
+            }
+        });
 
 
     }
@@ -752,68 +759,14 @@ public class MainActivity extends AppCompatActivity {
         return intent;
 
     }
+
+
+
 }
 
 
 
 
 
-
-
-//    private void loginUser() {
-//        //TODO: Make loginUser FUNCTIONAL
-//        user = new User("Jeslyn", "jeslyn");
-//        loggedInUserId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID, -1);
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.logout_menu, menu);
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean onPrepareOptionsMenu(Menu menu) {
-//        MenuItem item = menu.findItem(R.id.logoutMenuItem);
-//        item.setVisible(true);
-//        item.setTitle(user.getUsername());
-//        item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(@NonNull MenuItem item) {
-//                showLogOutDialog();
-//                return false;
-//            }
-//        });
-//        return super.onPrepareOptionsMenu(menu);
-//    }
-//
-//    private void showLogOutDialog() {
-//        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(MainActivity.this);
-//        final AlertDialog alertDialog = alertBuilder.create();
-//
-//        alertBuilder.setMessage("Are you sure you want to sign out?");
-//        alertBuilder.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                logout();
-//            }
-//        });
-//
-//        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                alertDialog.dismiss();
-//            }
-//        });
-//
-//        alertBuilder.create().show();
-//
-//    }
-//
-//    private void logout() {
-//        //TODO: Finish logout method
-//        startActivity(Starting_Page.startingPageIntentFactory(getApplicationContext()));
-//    }
 
 
