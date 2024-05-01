@@ -92,8 +92,6 @@ public class Options_Page extends AppCompatActivity {
     }
 
 
-//     loggedInUserId not updating correctly
-//     need to update shared preferences
     private void loginUser(Bundle savedInstanceState) {
         //check shared preference for logged in user, read from file
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),

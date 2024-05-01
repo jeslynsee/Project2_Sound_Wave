@@ -50,28 +50,6 @@ public class Login_Page extends AppCompatActivity {
         });
     }
 
-//    private void verifyUser() {
-//        String username = binding.usernameTextEdit.getText().toString();
-//        if (username.isEmpty()) {
-//            toastMaker("Cannot have blank Username");
-//            return;
-//        }
-//        LiveData<User> userObserver = repository.getUserByUserName(username);
-//        userObserver.observe(this, user -> {
-//            if (user != null) {
-//                String password = binding.passwordEditText.getText().toString();
-//                if (password.equals(user.getPassword())) {
-//                    Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), user.getId());
-//                    startActivity(intent);
-//                } else {
-//                    toastMaker("Invalid Password");
-//                }
-//            } else {
-//                toastMaker(String.format("No %s found", username));
-//            }
-//        });
-//    }
-
     private void verifyUser() {
         String username = binding.usernameTextEdit.getText().toString();
         if (username.isEmpty()) {
