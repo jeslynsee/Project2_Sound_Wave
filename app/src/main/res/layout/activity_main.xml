@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:layout_width="390dp"
+        android:layout_width="410dp"
         android:id="@+id/Title"
         android:layout_height="75dp"
         android:gravity="center"
@@ -23,235 +23,265 @@
 
     <TextView
         android:id="@+id/select_genre"
-        android:layout_width="390dp"
+        android:layout_width="410dp"
         android:layout_height="75dp"
         android:gravity="center"
-        android:textSize="26sp"
+        android:textSize="24sp"
         app:layout_constraintTop_toBottomOf="@id/Title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/select_your_favorite_genres" />
 
 
-    <RadioGroup
-        android:layout_width="match_parent"
+    <RadioButton
+        android:id="@+id/Button2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Radio_GRP"
-        android:orientation="vertical"
+        android:text="@string/blues"
+        android:textSize="24sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBaseline_toTopOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.355" />
 
-
-        <RadioButton
-            android:id="@+id/Button1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="150dp"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/alt"
-            android:textSize="25sp"
-            android:layout_gravity="left"/>
-
-        <RadioButton
-            android:id="@+id/Button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/blues"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre"
-            />
-
-
-        <RadioButton
-            android:id="@+id/Button3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/chill"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/classical"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-        <RadioButton
-            android:id="@+id/Button5"
-            android:layout_width="wrap_content"
-            android:text="@string/country"
-            android:onClick="onRadioButtonClicked"
-            android:textSize="25sp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/electronic"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/folk"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/hip_hop"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/indie"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
+    <RadioButton
+        android:id="@+id/Button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/alt"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.285" />
 
 
 
-        <RadioButton
-            android:id="@+id/Button10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/jazz"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/latin"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/metal"
-            android:textSize="25sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-        <RadioButton
-            android:id="@+id/Button13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/opera"
-            android:textSize="25sp"
-            android:layout_marginStart="184dp"
-            android:layout_marginTop="-375dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-        <RadioButton
-            android:id="@+id/Button14"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/psychedelic"
-            android:textSize="25sp"
-            android:layout_marginStart="184dp"
-            android:layout_marginBottom="-200dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button15"
-            android:layout_width="wrap_content"
-            android:layout_height="49dp"
-            android:layout_marginStart="184dp"
-            android:onClick="onRadioButtonClicked"
-            android:text="@string/rap"
-            android:textSize="25sp"
-            android:layout_marginTop="201dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button16"
-            android:layout_width="wrap_content"
-            android:text="@string/r_and_b"
-            android:onClick="onRadioButtonClicked"
-            android:textSize="25sp"
-            android:layout_height="49dp"
-            android:layout_marginStart="184dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-        <RadioButton
-            android:id="@+id/Button17"
-            android:layout_width="wrap_content"
-            android:text="@string/soul"
-            android:textSize="25sp"
-            android:layout_height="49dp"
-            android:onClick="onRadioButtonClicked"
-            android:layout_marginStart="184dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-        <RadioButton
-            android:id="@+id/Button18"
-            android:layout_width="wrap_content"
-            android:text="@string/trap"
-            android:textSize="25sp"
-            android:layout_height="49dp"
-            android:onClick="onRadioButtonClicked"
-            android:layout_marginStart="184dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/select_genre" />
-
-
-    </RadioGroup>
 
 
 
+    <RadioButton
+        android:id="@+id/Button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/chill"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.427" />
+
+
+
+
+    <RadioButton
+        android:id="@+id/Button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/classical"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.499" />
+
+
+
+
+    <RadioButton
+        android:id="@+id/Button5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/country"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.571" />
+
+
+
+
+    <RadioButton
+        android:id="@+id/Button6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/electronic"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.641" />
+
+
+
+    <RadioButton
+        android:id="@+id/Button7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/folk"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.711" />
+
+    <RadioButton
+        android:id="@+id/Button8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hip_hop"
+        android:textSize="24sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.781" />
+
+    <RadioButton
+        android:id="@+id/Button9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/indie"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.852" />
+
+
+
+
+
+    <RadioButton
+        android:id="@+id/Button10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/jazz"
+        android:textSize="24sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.922" />
+
+    <RadioButton
+        android:id="@+id/Button11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/latin"
+        android:textSize="24sp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.992" />
+
+
+
+
+    <RadioButton
+        android:id="@+id/Button12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:text="@string/metal"
+        android:layout_marginStart="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.273" />
+
+
+
+    <RadioButton
+        android:id="@+id/Button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/opera"
+        android:textSize="24sp"
+        android:layout_marginStart="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.344" />
+
+
+
+
+    <RadioButton
+        android:id="@+id/Button14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/psychedelic"
+        android:layout_marginStart="148dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.408" />
+
+
+    <RadioButton
+        android:id="@+id/Button15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rap"
+        android:textSize="24sp"
+        android:layout_marginStart="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.484" />
+
+
+
+    <RadioButton
+        android:id="@+id/Button16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/r_and_b"
+        android:textSize="24sp"
+        android:layout_marginStart="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.543" />
+
+
+
+    <RadioButton
+        android:id="@+id/Button17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="184dp"
+        android:textSize="24sp"
+        android:text="@string/soul"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.613" />
+
+
+    <RadioButton
+        android:id="@+id/Button18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="184dp"
+        android:text="@string/trap"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Title"
+        app:layout_constraintVertical_bias="0.683" />
 
     <Button
         android:id="@+id/Playlist_Button"
