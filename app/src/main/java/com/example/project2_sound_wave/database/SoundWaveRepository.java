@@ -69,7 +69,13 @@ public class SoundWaveRepository {
         return null;
     }
 
+    public LiveData<List<String>> getAllArtists(String username) {
+       return playlistDAO.getAllArtists(username);
+    }
 
+    public LiveData<List<String>> getAllGenres(String username) {
+       return playlistDAO.getAllGenres(username);
+    }
 
     public void insertSoundWave(SoundWave soundWave) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->
@@ -92,13 +98,19 @@ public class SoundWaveRepository {
         });
     }
 
-    public void updatePlaylistWithArtistAndGenre(String username, List<String> artist, List<String> genres) {
+   public void updateArtistList(List<String> artists, String username) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->
         {
-            LiveData<Playlist> playlist = playlistDAO.getPlaylistByUserName(username);
-
+            playlistDAO.updateArtistList(artists, username);
         });
-    }
+   }
+
+   public void updateGenreList(List<String> genres, String username) {
+       SoundWaveDatabase.databaseWriteExecutor.execute(() ->
+       {
+           playlistDAO.updateGenreList(genres, username);
+       });
+   }
 
     public void delete(User user) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->

@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -49,17 +50,44 @@ public class Login_Page extends AppCompatActivity {
         });
     }
 
+//    private void verifyUser() {
+//        String username = binding.usernameTextEdit.getText().toString();
+//        if (username.isEmpty()) {
+//            toastMaker("Cannot have blank Username");
+//            return;
+//        }
+//        LiveData<User> userObserver = repository.getUserByUserName(username);
+//        userObserver.observe(this, user -> {
+//            if (user != null) {
+//                String password = binding.passwordEditText.getText().toString();
+//                if (password.equals(user.getPassword())) {
+//                    Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), user.getId());
+//                    startActivity(intent);
+//                } else {
+//                    toastMaker("Invalid Password");
+//                }
+//            } else {
+//                toastMaker(String.format("No %s found", username));
+//            }
+//        });
+//    }
+
     private void verifyUser() {
         String username = binding.usernameTextEdit.getText().toString();
         if (username.isEmpty()) {
             toastMaker("Cannot have blank Username");
             return;
         }
+
         LiveData<User> userObserver = repository.getUserByUserName(username);
         userObserver.observe(this, user -> {
             if (user != null) {
                 String password = binding.passwordEditText.getText().toString();
                 if (password.equals(user.getPassword())) {
+                    // Store the logged-in user's ID in SharedPreferences
+                    storeLoggedInUserId(user.getId());
+
+                    // Start the Options_Page activity
                     Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), user.getId());
                     startActivity(intent);
                 } else {
@@ -69,6 +97,14 @@ public class Login_Page extends AppCompatActivity {
                 toastMaker(String.format("No %s found", username));
             }
         });
+    }
+
+    private void storeLoggedInUserId(int userId) {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(getString(R.string.preference_userId_key), userId);
+        sharedPrefEditor.apply();
     }
 
     private void toastMaker(String message) {

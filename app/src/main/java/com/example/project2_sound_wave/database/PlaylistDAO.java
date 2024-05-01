@@ -11,6 +11,7 @@ import androidx.room.Update;
 import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.User;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -30,5 +31,16 @@ public interface PlaylistDAO {
     @Query("DELETE from " + SoundWaveDatabase.PLAYLIST_TABLE)
     void deleteAll();
 
+    @Query("UPDATE playlistTable SET artists = :artists WHERE username = :username")
+    void updateArtistList(List<String> artists, String username);
+
+    @Query("UPDATE playlistTable SET genres = :genres WHERE username = :username")
+    void updateGenreList(List<String> genres, String username);
+
+    @Query("SELECT artists FROM playlistTable WHERE username = :username")
+    LiveData<List<String>> getAllArtists(String username);
+
+    @Query("SELECT genres FROM playlistTable WHERE username = :username")
+    LiveData<List<String>> getAllGenres(String username);
 
 }
