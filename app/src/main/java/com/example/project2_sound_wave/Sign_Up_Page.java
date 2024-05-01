@@ -76,9 +76,6 @@ public class Sign_Up_Page extends AppCompatActivity {
                     repository.insertUser(newUser);
                     Playlist newPlaylist = new Playlist();
                     newPlaylist.setUsername(username);
-                    newPlaylist.setArtists(new ArrayList<>());
-                    newPlaylist.setGenres(new ArrayList<>());
-                    repository.insertPlaylist(newPlaylist);
                     userObserver = null;
                     toastMaker("Successfully signed up!");
                     toastMaker("Login now to continue!");

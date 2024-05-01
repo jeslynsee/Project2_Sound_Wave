@@ -102,31 +102,6 @@ public class Browse_Artists_Page extends AppCompatActivity {
             @Override
             public void onChanged(String username) {
                 // Use the username to fetch artists and genres
-                repository.getAllArtists(username).observe(Browse_Artists_Page.this, new Observer<List<String>>() {
-                    @Override
-                    public void onChanged(List<String> artists) {
-                        // Update artists list
-                        if (artists != null) {
-                            artists.add(artist);
-                            toastMaker("Artist added to list");
-                            // Update the database with the modified list
-                            repository.updateArtistList(artists, username);
-                        }
-                    }
-                });
-
-                repository.getAllGenres(username).observe(Browse_Artists_Page.this, new Observer<List<String>>() {
-                    @Override
-                    public void onChanged(List<String> genres) {
-                        // Update genres list
-                        if (genres != null) {
-                            genres.add(genre);
-                            toastMaker("Genre added to list");
-                            // Update the database with the modified list
-                            repository.updateGenreList(genres, username);
-                        }
-                    }
-                });
 
                 toastMaker("Artist successfully added to playlist!");
             }

@@ -69,13 +69,46 @@ public class SoundWaveRepository {
         return null;
     }
 
-    public LiveData<List<String>> getAllArtists(String username) {
-       return playlistDAO.getAllArtists(username);
+    public LiveData<String> getArtist1(String username) {
+        return playlistDAO.getArtist1(username);
     }
 
-    public LiveData<List<String>> getAllGenres(String username) {
-       return playlistDAO.getAllGenres(username);
+    public LiveData<String> getArtist2(String username) {
+        return playlistDAO.getArtist2(username);
     }
+
+    public LiveData<String> getArtist3(String username) {
+        return playlistDAO.getArtist3(username);
+    }
+
+    public LiveData<String> getArtist4(String username) {
+        return playlistDAO.getArtist4(username);
+    }
+
+    public LiveData<String> getArtist5(String username) {
+        return playlistDAO.getArtist5(username);
+    }
+
+    public LiveData<String> getGenre1(String username) {
+        return playlistDAO.getGenre1(username);
+    }
+
+    public LiveData<String> getGenre2(String username) {
+        return playlistDAO.getGenre2(username);
+    }
+
+    public LiveData<String> getGenre3(String username) {
+        return playlistDAO.getGenre3(username);
+    }
+
+    public LiveData<String> getGenre4(String username) {
+        return playlistDAO.getGenre4(username);
+    }
+
+    public LiveData<String> getGenre5(String username) {
+        return playlistDAO.getGenre5(username);
+    }
+
 
     public void insertSoundWave(SoundWave soundWave) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->
@@ -97,20 +130,6 @@ public class SoundWaveRepository {
             playlistDAO.insert(playlist);
         });
     }
-
-   public void updateArtistList(List<String> artists, String username) {
-        SoundWaveDatabase.databaseWriteExecutor.execute(() ->
-        {
-            playlistDAO.updateArtistList(artists, username);
-        });
-   }
-
-   public void updateGenreList(List<String> genres, String username) {
-       SoundWaveDatabase.databaseWriteExecutor.execute(() ->
-       {
-           playlistDAO.updateGenreList(genres, username);
-       });
-   }
 
     public void delete(User user) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->
