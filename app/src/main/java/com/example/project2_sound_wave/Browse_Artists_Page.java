@@ -32,6 +32,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
     SoundWaveRepository repository;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
