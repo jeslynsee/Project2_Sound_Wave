@@ -45,6 +45,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
     }
 
+
     private void populateArtistList(LinearLayout artistList) {
         ArrayList<SoundWave> soundWaveData = repository.getAllLogs();
 
@@ -58,7 +59,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
             addToPlaylist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    showAddArtistDialog(data.getArtist());
+                    showAddArtistDialog(data.getArtist(), data.getGenre());
                 }
             });
 
@@ -67,7 +68,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
     }
 
-    private void showAddArtistDialog(String artist) {
+    private void showAddArtistDialog(String artist, String genre) {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Browse_Artists_Page.this);
         alertBuilder.setTitle("Adding Artist");
         alertBuilder.setMessage("Are you sure you want to add " + artist + " to your playlist?");
@@ -75,7 +76,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
         alertBuilder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                addArtistToUserPlaylist(artist);
+                addArtistAndGenreToUserPlaylist(artist, genre);
             }
         });
 
@@ -90,26 +91,45 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
     }
 
-    private void addArtistToUserPlaylist(String artist) {
-         int userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
-         LiveData<String> username = repository.getUserNameByUserId(userId);
 
-         LiveData<Playlist> playlist = repository.getPlaylistByUserName(username.getValue());
+    public void addArtistAndGenreToUserPlaylist(String artist, String genre) {
+        int userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
+        LiveData<String> username = repository.getUserNameByUserId(userId);
 
-//        repository.insertArtist(artist);
-        toastMaker("Successfully added artist to playlist!");
+        // Observe the LiveData to get the username
+        username.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String username) {
+                // Use the username to fetch artists and genres
+                repository.getAllArtists(username).observe(Browse_Artists_Page.this, new Observer<List<String>>() {
+                    @Override
+                    public void onChanged(List<String> artists) {
+                        // Update artists list
+                        if (artists != null) {
+                            artists.add(artist);
+                            toastMaker("Artist added to list");
+                            // Update the database with the modified list
+                            repository.updateArtistList(artists, username);
+                        }
+                    }
+                });
 
-         //TODO: Add song to User's playlist and figure out what cases need to be caught (error checks)
-//        Observer<Playlist> playlistObserver = new Observer<Playlist>() {
-//            @Override
-//            public void onChanged(Playlist playlist) {
-//                toastMaker("Entering playlist Observer");
-//                List<String> artists = playlist.getArtists();
-//                artists.add(artist);
-//                toastMaker("Successfully added artist");
-//            }
-//        };
-//        repository.getPlaylistByUserName(username.getValue()).observe(Browse_Artists_Page.this, playlistObserver);
+                repository.getAllGenres(username).observe(Browse_Artists_Page.this, new Observer<List<String>>() {
+                    @Override
+                    public void onChanged(List<String> genres) {
+                        // Update genres list
+                        if (genres != null) {
+                            genres.add(genre);
+                            toastMaker("Genre added to list");
+                            // Update the database with the modified list
+                            repository.updateGenreList(genres, username);
+                        }
+                    }
+                });
+
+                toastMaker("Artist successfully added to playlist!");
+            }
+        });
     }
 
 

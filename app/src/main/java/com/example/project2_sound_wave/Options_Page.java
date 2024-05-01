@@ -41,11 +41,13 @@ public class Options_Page extends AppCompatActivity {
 
         loginUser(savedInstanceState);
 
-
+        // User is not logged in at this point, go to login screen
         if (loggedInUserId == LOGGED_OUT) {
             Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
             startActivity(intent);
         }
+
+        updateSharedPreference();
 
         binding.myPlaylistButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,9 +88,12 @@ public class Options_Page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 
+//     loggedInUserId not updating correctly
+//     need to update shared preferences
     private void loginUser(Bundle savedInstanceState) {
         //check shared preference for logged in user, read from file
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key),
@@ -112,10 +117,7 @@ public class Options_Page extends AppCompatActivity {
                 if (this.user.isAdmin()) {
                     binding.adminButton.setVisibility(View.VISIBLE);
                 }
-
                 invalidateOptionsMenu();
-            } else {
-                logout();
             }
         });
 
@@ -125,10 +127,7 @@ public class Options_Page extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedInUserId);
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USER_ID_KEY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(Options_Page.SHARED_PREFERENCE_USER_ID_KEY, loggedInUserId);
-        sharedPrefEditor.apply();
+        updateSharedPreference();
     }
 
     @Override
@@ -182,9 +181,9 @@ public class Options_Page extends AppCompatActivity {
     private void logout() {
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
-        getIntent().putExtra(OPTIONS_PAGE_USER_ID, LOGGED_OUT);
+        getIntent().putExtra(OPTIONS_PAGE_USER_ID, loggedInUserId);
 
-        startActivity(Starting_Page.startingPageIntentFactory(getApplicationContext()));
+        startActivity(Login_Page.loginIntentFactory(getApplicationContext()));
     }
 
     private void updateSharedPreference() {
