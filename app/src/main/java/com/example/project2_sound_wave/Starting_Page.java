@@ -41,7 +41,7 @@ public class Starting_Page extends AppCompatActivity {
         binding.startingPageLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
+                Intent intent = Login_Page.loginIntentFactory(getApplicationContext(), loggedInUserId);
                 startActivity(intent);
             }
         });
