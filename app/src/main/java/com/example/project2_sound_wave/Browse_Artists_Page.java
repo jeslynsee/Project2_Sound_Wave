@@ -23,6 +23,7 @@ import com.example.project2_sound_wave.databinding.ActivityBrowseArtistsPageBind
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -43,6 +44,8 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
         repository = SoundWaveRepository.getRepository(getApplication());
 
+        userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
+
         LinearLayout artistList = binding.artistListContainer;
         populateArtistList(artistList);
 
@@ -58,7 +61,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
             TextView artistInfoTextView = artistView.findViewById(R.id.artist_name);
             ImageButton addToPlaylist = artistView.findViewById(R.id.add_to_playlist);
 
-            artistInfoTextView.setText(String.format("%s    [ Genre: %s]", data.getArtist(), data.getGenre()));
+            artistInfoTextView.setText(String.format("%s    [Genre: %s]", data.getArtist(), data.getGenre()));
             addToPlaylist.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,9 +99,14 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
 
     public void addArtistAndGenreToUserPlaylist(String artist, String genre) {
-        userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
 //TODO: Finish implementing logic
-        LiveData<String> usernameLive = repository.getUserNameByUserId(userId);
+        LiveData<String> liveDataUsername = repository.getUserNameByUserId(userId);
+        liveDataUsername.observe(Browse_Artists_Page.this, new Observer<String>() {
+            @Override
+            public void onChanged(String username) {
+                checkNextEmptySlot(artist, genre);
+            }
+        });
 // Good news is artists are being updated into the playlist table to the user it belongs too, but
         //problem is we need to check the next empty slot and fill that and break
         // right now it doesn't break, so if i have a new user, i add one artist, it duplicates
@@ -162,6 +170,93 @@ public class Browse_Artists_Page extends AppCompatActivity {
 ////                    usernameLive.removeObserver(this);
 //            }
 //        });
+
+    }
+
+    private void checkNextEmptySlot(String artist, String genre) {
+        LiveData<String> liveDataUsername = repository.getUserNameByUserId(userId);
+        int slot = -1;
+
+        liveDataUsername.observe(Browse_Artists_Page.this, new Observer<String>() {
+
+            @Override
+            public void onChanged(String username) {
+                repository.getPlaylistByUserName(username).observe(Browse_Artists_Page.this, new Observer<Playlist>() {
+                    @Override
+                    public void onChanged(Playlist playlist) {
+                        if (playlist.getArtist1() == null) {
+                           repository.getArtist1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                               @Override
+                               public void onChanged(String artistInTable) {
+                                   repository.updateArtist1(artist, username);
+                               }
+                           });
+                            repository.getGenre1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String genreInTable) {
+                                    repository.updateGenre1(genre, username);
+                                }
+                            });
+                            toastMaker("Successfully added artist to playlist!");
+                        } else if (playlist.getArtist2() == null) {
+                            repository.getArtist2(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist2(artist, username);
+                                }
+                            });
+                            repository.getGenre2(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String genreInTable) {
+                                    repository.updateGenre2(genre, username);
+                                }
+                            });
+                            toastMaker("Successfully added artist to playlist!");
+                        } else if (playlist.getArtist3() == null) {
+                            repository.getArtist3(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist3(artist, username);
+                                }
+                            });
+                            repository.getGenre3(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String genreInTable) {
+                                    repository.updateGenre3(genre, username);
+                                }
+                            });
+                        } else if (playlist.getArtist4() == null) {
+                            repository.getArtist4(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist4(artist, username);
+                                }
+                            });
+                            repository.getGenre4(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String genreInTable) {
+                                    repository.updateGenre4(genre, username);
+                                }
+                            });
+                        } else if (playlist.getArtist5() == null) {
+                            repository.getArtist5(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist5(artist, username);
+                                }
+                            });
+                            repository.getGenre5(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String genreInTable) {
+                                    repository.updateGenre5(genre, username);
+                                }
+                            });
+                        }
+                    }
+                });
+
+            }
+        });
 
     }
 
