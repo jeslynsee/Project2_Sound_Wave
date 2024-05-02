@@ -24,6 +24,7 @@ import com.example.project2_sound_wave.databinding.ActivityBrowseArtistsPageBind
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Browse_Artists_Page extends AppCompatActivity {
     ActivityBrowseArtistsPageBinding binding;
@@ -32,6 +33,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
     SoundWaveRepository repository;
 
+    private int userId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,29 +96,83 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
 
     public void addArtistAndGenreToUserPlaylist(String artist, String genre) {
-        int userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
-        LiveData<String> username = repository.getUserNameByUserId(userId);
+        userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY, 0);
+//TODO: Finish implementing logic
+        LiveData<String> usernameLive = repository.getUserNameByUserId(userId);
+// Good news is artists are being updated into the playlist table to the user it belongs too, but
+        //problem is we need to check the next empty slot and fill that and break
+        // right now it doesn't break, so if i have a new user, i add one artist, it duplicates
+        // because it adds in artist1 and artist2
 
-        // Observe the LiveData to get the username
-        username.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String username) {
-                // Use the username to fetch artists and genres
+//        usernameLive.observe(this, new Observer<String>() {
+//            @Override
+//            public void onChanged(String username) {
 
-                toastMaker("Artist successfully added to playlist!");
-            }
-        });
+//
+//                    repository.getArtist1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+//                        @Override
+//                        public void onChanged(String artistInTable) {
+//                            if (artistInTable == null) {
+//                                repository.updateArtist1(artist, username);
+//                                toastMaker("Successfully added artist to playlist!");
+//                                // remove artist observer
+//                                repository.getArtist1(username).removeObserver(this);
+//                            }
+//                        }
+//                    });
+//
+//
+//                    repository.getGenre1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+//                        @Override
+//                        public void onChanged(String genreInTable) {
+//                            if (genreInTable == null) {
+//                                repository.updateGenre1(genre, username);
+//                                //remove genre observer
+//                                repository.getGenre1(username).removeObserver(this);
+//                                isUpdated.set(true);
+//                            }
+//                        }
+//                    });
+//
+//                    repository.getArtist2(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+//                        @Override
+//                        public void onChanged(String artistInTable) {
+//                            if (artistInTable == null) {
+//                                repository.updateArtist2(artist, username);
+//                                toastMaker("Successfully added artist to playlist!");
+//                                // remove artist observer
+//                                repository.getArtist2(username).removeObserver(this);
+//                            }
+//                        }
+//                    });
+//
+//                    repository.getGenre2(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+//                        @Override
+//                        public void onChanged(String genreInTable) {
+//                            if (genreInTable == null) {
+//                                repository.updateGenre2(genre, username);
+//                                //remove genre observer
+//                                repository.getGenre2(username).removeObserver(this);
+//                                isUpdated.set(true);
+//                            }
+//                        }
+//                    });
+//
+//                    //  Remove username observer
+////                    usernameLive.removeObserver(this);
+//            }
+//        });
+
     }
-
-
 
 
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    static Intent browseArtistsPageIntentFactory(Context context) {
+    static Intent browseArtistsPageIntentFactory(Context context, int userId) {
         Intent intent = new Intent(context, Browse_Artists_Page.class);
+        intent.putExtra(BROWSE_ARTISTS_KEY, userId);
         return intent;
     }
 

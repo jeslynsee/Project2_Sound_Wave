@@ -54,4 +54,5 @@
     <string name="view_playlist"> View Playlist </string>
     <string name="browse_by_genre">Browse By Genre</string>
     <string name="plus_icon">Plus Icon</string>
+    <string name="clear_playlist">Clear Playlist</string>
 </resources>

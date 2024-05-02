@@ -18,7 +18,7 @@ public class Login_Page extends AppCompatActivity {
 
     public static final String TAG = "SOUNDWAVE";
 
-    private static final String USERNAME_KEY = "com.example.project2_sound_wave.USERNAME_KEY";
+    private static final String LOGIN_PAGE_USER_ID = "com.example.project2_sound_wave.LOGIN_PAGE_USER_ID";
 
     ActivityLoginPageBinding binding;
 
@@ -68,6 +68,7 @@ public class Login_Page extends AppCompatActivity {
                     // Start the Options_Page activity
                     Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), user.getId());
                     startActivity(intent);
+                    toastMaker("Signed in successfully!");
                 } else {
                     toastMaker("Invalid Password");
                 }
@@ -89,9 +90,9 @@ public class Login_Page extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    static Intent loginIntentFactory(Context context) {
+    static Intent loginIntentFactory(Context context, int userId) {
         Intent intent = new Intent(context, Login_Page.class);
-//        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
+        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
         // need to get User info to Options Page somehow
         return intent;
     }

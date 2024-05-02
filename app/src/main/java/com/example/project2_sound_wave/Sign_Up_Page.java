@@ -21,6 +21,8 @@ public class Sign_Up_Page extends AppCompatActivity {
     SoundWaveRepository repository;
     private Observer<User> userObserver;
 
+    private static final int LOGGED_OUT = -1;
+
 
     private static final String SIGN_UP_KEY = "com.example.project2_sound_wave.SIGN_UP_KEY";
 
@@ -46,7 +48,7 @@ public class Sign_Up_Page extends AppCompatActivity {
         binding.loginRedirectTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
+                Intent intent = Login_Page.loginIntentFactory(getApplicationContext(), LOGGED_OUT);
                 startActivity(intent);
             }
         });
@@ -76,10 +78,11 @@ public class Sign_Up_Page extends AppCompatActivity {
                     repository.insertUser(newUser);
                     Playlist newPlaylist = new Playlist();
                     newPlaylist.setUsername(username);
+                    repository.insertPlaylist(newPlaylist);
                     userObserver = null;
                     toastMaker("Successfully signed up!");
                     toastMaker("Login now to continue!");
-                    Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
+                    Intent intent = Login_Page.loginIntentFactory(getApplicationContext(), user.getId());
                     startActivity(intent);
 
                     repository.getUserByUserName(username).removeObserver(this);
