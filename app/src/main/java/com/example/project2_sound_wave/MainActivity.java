@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     String selectedTrapArtist = "Travis Scott";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedAltArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
@@ -150,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedBluesArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
@@ -184,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedChillArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });
@@ -217,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedClassicalArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -253,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedCountryArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -290,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedElectronicArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -327,6 +334,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedFolkArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -363,6 +371,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedHipHopArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -399,6 +408,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedIndieArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -436,6 +446,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedJazzArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -473,6 +484,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedLatinArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -510,6 +522,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedMetalArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -546,6 +559,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedOperaArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -582,6 +596,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedPsychedelicArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -618,6 +633,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedRapArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -655,6 +671,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedRandBArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -691,6 +708,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedSoulArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
@@ -728,6 +746,7 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Add to PLayList", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "You Added: " + selectedTrapArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
 
                     }
