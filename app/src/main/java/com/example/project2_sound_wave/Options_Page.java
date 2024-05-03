@@ -25,6 +25,7 @@ public class Options_Page extends AppCompatActivity {
     public static final String TAG = "SOUNDWAVE";
     private static final int LOGGED_OUT = -1;
     private static final String SAVED_INSTANCE_STATE_USERID_KEY = "com.example.project2_sound_wave.SAVED_INSTANCE_STATE_USERID_KEY";
+
     ActivityOptionsPageBinding binding;
 
     SoundWaveRepository repository;
@@ -41,11 +42,13 @@ public class Options_Page extends AppCompatActivity {
 
         loginUser(savedInstanceState);
 
-
+        // User is not logged in at this point, go to login screen
         if (loggedInUserId == LOGGED_OUT) {
-            Intent intent = Login_Page.loginIntentFactory(getApplicationContext());
+            Intent intent = Login_Page.loginIntentFactory(getApplicationContext(), loggedInUserId);
             startActivity(intent);
         }
+
+        updateSharedPreference();
 
         binding.myPlaylistButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +61,7 @@ public class Options_Page extends AppCompatActivity {
         binding.browseArtistsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = Browse_Artists_Page.browseArtistsPageIntentFactory(getApplicationContext());
+                Intent intent = Browse_Artists_Page.browseArtistsPageIntentFactory(getApplicationContext(), loggedInUserId);
                 startActivity(intent);
             }
         });
@@ -86,6 +89,7 @@ public class Options_Page extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
 
@@ -112,10 +116,7 @@ public class Options_Page extends AppCompatActivity {
                 if (this.user.isAdmin()) {
                     binding.adminButton.setVisibility(View.VISIBLE);
                 }
-
                 invalidateOptionsMenu();
-            } else {
-                logout();
             }
         });
 
@@ -125,10 +126,7 @@ public class Options_Page extends AppCompatActivity {
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(SAVED_INSTANCE_STATE_USERID_KEY, loggedInUserId);
-        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCE_USER_ID_KEY, Context.MODE_PRIVATE);
-        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
-        sharedPrefEditor.putInt(Options_Page.SHARED_PREFERENCE_USER_ID_KEY, loggedInUserId);
-        sharedPrefEditor.apply();
+        updateSharedPreference();
     }
 
     @Override
@@ -182,9 +180,9 @@ public class Options_Page extends AppCompatActivity {
     private void logout() {
         loggedInUserId = LOGGED_OUT;
         updateSharedPreference();
-        getIntent().putExtra(OPTIONS_PAGE_USER_ID, LOGGED_OUT);
+        getIntent().putExtra(OPTIONS_PAGE_USER_ID, loggedInUserId);
 
-        startActivity(Starting_Page.startingPageIntentFactory(getApplicationContext()));
+        startActivity(Login_Page.loginIntentFactory(getApplicationContext(), loggedInUserId));
     }
 
     private void updateSharedPreference() {

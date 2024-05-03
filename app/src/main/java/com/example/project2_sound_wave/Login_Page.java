@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -17,7 +18,7 @@ public class Login_Page extends AppCompatActivity {
 
     public static final String TAG = "SOUNDWAVE";
 
-    private static final String USERNAME_KEY = "com.example.project2_sound_wave.USERNAME_KEY";
+    private static final String LOGIN_PAGE_USER_ID = "com.example.project2_sound_wave.LOGIN_PAGE_USER_ID";
 
     ActivityLoginPageBinding binding;
 
@@ -55,13 +56,19 @@ public class Login_Page extends AppCompatActivity {
             toastMaker("Cannot have blank Username");
             return;
         }
+
         LiveData<User> userObserver = repository.getUserByUserName(username);
         userObserver.observe(this, user -> {
             if (user != null) {
                 String password = binding.passwordEditText.getText().toString();
                 if (password.equals(user.getPassword())) {
+                    // Store the logged-in user's ID in SharedPreferences
+                    storeLoggedInUserId(user.getId());
+
+                    // Start the Options_Page activity
                     Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), user.getId());
                     startActivity(intent);
+                    toastMaker("Signed in successfully!");
                 } else {
                     toastMaker("Invalid Password");
                 }
@@ -71,13 +78,21 @@ public class Login_Page extends AppCompatActivity {
         });
     }
 
+    private void storeLoggedInUserId(int userId) {
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        SharedPreferences.Editor sharedPrefEditor = sharedPreferences.edit();
+        sharedPrefEditor.putInt(getString(R.string.preference_userId_key), userId);
+        sharedPrefEditor.apply();
+    }
+
     private void toastMaker(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    static Intent loginIntentFactory(Context context) {
+    static Intent loginIntentFactory(Context context, int userId) {
         Intent intent = new Intent(context, Login_Page.class);
-//        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
+        intent.putExtra(LOGIN_PAGE_USER_ID, userId);
         // need to get User info to Options Page somehow
         return intent;
     }

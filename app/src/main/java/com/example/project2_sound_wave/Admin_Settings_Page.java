@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.UserDAO;
+import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivityAdminSettingsPageBinding;
 
@@ -45,6 +46,49 @@ public class Admin_Settings_Page extends AppCompatActivity {
                 showDeleteUserDialog();
             }
         });
+
+        binding.addUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddUserDialog();
+            }
+        });
+    }
+
+    private void showAddUserDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Admin_Settings_Page.this);
+        alertBuilder.setTitle("All Users");
+
+        LinearLayout dialogLayout = new LinearLayout(this);
+        dialogLayout.setOrientation(LinearLayout.VERTICAL);
+
+        ScrollView scrollView = new ScrollView(this);
+        final LinearLayout usernamesLayout = new LinearLayout(this);
+        usernamesLayout.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(usernamesLayout);
+        dialogLayout.addView(scrollView); // Add ScrollView to the dialog layout
+
+        LiveData<List<String>> allUsernames = repository.getAllUsernames();
+
+        allUsernames.observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> usernames) {
+                usernamesLayout.removeAllViews(); // Clear previous views
+                if (usernames != null && !usernames.isEmpty()) {
+                    for (String username : usernames) {
+                        TextView textView = new TextView(Admin_Settings_Page.this);
+                        textView.setText(username);
+                        usernamesLayout.addView(textView);
+                    }
+                } else {
+                    TextView textView = new TextView(Admin_Settings_Page.this);
+                    textView.setText("No users found.");
+                    usernamesLayout.addView(textView);
+                }
+            }
+        });
+
+        //TODO: Finishing implementing alertDialog
     }
 
     private void showDeleteUserDialog() {
@@ -133,6 +177,12 @@ public class Admin_Settings_Page extends AppCompatActivity {
                 repository.delete(user);
                 repository.getUserByUserName(user.getUsername()).removeObserver(userObserver);
                 userObserver = null;
+                repository.getPlaylistByUserName(user.getUsername()).observe(Admin_Settings_Page.this, new Observer<Playlist>() {
+                    @Override
+                    public void onChanged(Playlist playlist) {
+                        repository.delete(playlist);
+                    }
+                });
                 toastMaker("User successfully deleted");
                 dialog.dismiss();
             }
