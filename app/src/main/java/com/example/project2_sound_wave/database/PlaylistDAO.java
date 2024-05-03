@@ -31,6 +31,8 @@ public interface PlaylistDAO {
     @Query("DELETE from " + SoundWaveDatabase.PLAYLIST_TABLE)
     void deleteAll();
 
+    @Query("SELECT username FROM " + SoundWaveDatabase.PLAYLIST_TABLE)
+    LiveData<List<String>> getAllUsernamesFromPlaylistTable();
 
     @Query("SELECT artist1 from playlistTable WHERE username = :username")
     LiveData<String> getArtist1(String username);

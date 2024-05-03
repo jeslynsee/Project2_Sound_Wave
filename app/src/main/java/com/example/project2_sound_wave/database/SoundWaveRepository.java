@@ -266,6 +266,23 @@ public LiveData<List<User>> getAllUsers() {
         return null;
     }
 
+    public LiveData<List<String>> getAllUsernamesFromPlaylistTable() {
+        Future<LiveData<List<String>>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<LiveData<List<String>>>() {
+                    @Override
+                    public LiveData<List<String>> call() throws Exception {
+                        return playlistDAO.getAllUsernamesFromPlaylistTable();
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(Login_Page.TAG, "Problem getting all usernames in repository");
+        }
+        return null;
+    }
+
     public LiveData<String> getUserNameByUserId(int userId) {
         Future<LiveData<String>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
                 new Callable<LiveData<String>>() {

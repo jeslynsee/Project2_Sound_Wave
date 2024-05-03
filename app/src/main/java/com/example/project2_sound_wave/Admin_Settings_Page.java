@@ -31,7 +31,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
     ActivityAdminSettingsPageBinding binding;
     SoundWaveRepository repository;
     private Observer<User> userObserver;
-    private  Observer<User> addUserObserver;
+    private  Observer<List<String>> addUserObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,6 @@ public class Admin_Settings_Page extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showAddUserDialog();
-                addUserObserver = null;
             }
         });
     }
@@ -66,27 +65,27 @@ public class Admin_Settings_Page extends AppCompatActivity {
         dialogLayout.setOrientation(LinearLayout.VERTICAL);
 
         ScrollView scrollView = new ScrollView(this);
-        final LinearLayout usernamesLayout = new LinearLayout(this);
-        usernamesLayout.setOrientation(LinearLayout.VERTICAL);
-        scrollView.addView(usernamesLayout);
+        LinearLayout addUsernamesLayoutForAdding = new LinearLayout(this);
+        addUsernamesLayoutForAdding.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(addUsernamesLayoutForAdding);
         dialogLayout.addView(scrollView); // Add ScrollView to the dialog layout
 
-        LiveData<List<String>> allUsernames = repository.getAllUsernames();
+        LiveData<List<String>> allUsernamesInAddDialog = repository.getAllUsernamesFromPlaylistTable();
 
-        allUsernames.observe(this, new Observer<List<String>>() {
+        allUsernamesInAddDialog.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> usernames) {
-                usernamesLayout.removeAllViews(); // Clear previous views
+                addUsernamesLayoutForAdding.removeAllViews(); // Clear previous views
                 if (usernames != null && !usernames.isEmpty()) {
                     for (String username : usernames) {
                         TextView textView = new TextView(Admin_Settings_Page.this);
                         textView.setText(username);
-                        usernamesLayout.addView(textView);
+                        addUsernamesLayoutForAdding.addView(textView);
                     }
                 } else {
                     TextView textView = new TextView(Admin_Settings_Page.this);
                     textView.setText("No users found.");
-                    usernamesLayout.addView(textView);
+                    addUsernamesLayoutForAdding.addView(textView);
                 }
             }
         });
@@ -111,29 +110,28 @@ public class Admin_Settings_Page extends AppCompatActivity {
                 } else {
                     String usernameToAdd = editText.getText().toString();
                     String passwordToAdd = editText1.getText().toString();
-                    addUserObserver = new Observer<User>() {
-                        @Override
-                        public void onChanged(User user) {
-                            if (user != null) {
-                                if (addUserObserver != null) {
-                                    toastMaker("Username already taken. Cannot duplicate usernames");
-                                }
-                                dialog.dismiss();
-                            } else {
-                                User newUser = new User(usernameToAdd, passwordToAdd);
+
+                   addUserObserver = new Observer<List<String>>() {
+                       @Override
+                       public void onChanged(List<String> usernames) {
+                           if (usernames.contains(usernameToAdd)) {
+                               if (addUserObserver != null) {
+                                   toastMaker("Username already taken. Cannot duplicate usernames");
+                               }
+                               dialog.dismiss();
+                           } else {
+                               User newUser = new User(usernameToAdd, passwordToAdd);
                                 repository.insertUser(newUser);
                                 Playlist newPlaylist = new Playlist();
                                 newPlaylist.setUsername(usernameToAdd);
                                 repository.insertPlaylist(newPlaylist);
                                 addUserObserver = null;
                                 toastMaker("Successfully added new user!");
-//                            dialog.dismiss();
-                            }
-                            repository.getUserByUserName(usernameToAdd).removeObserver(this);
-                        }
-                    };
-                    repository.getUserByUserName(usernameToAdd).observe(Admin_Settings_Page.this, addUserObserver);
-
+                               repository.getAllUsernamesFromPlaylistTable().removeObserver(addUserObserver);
+                           }
+                       }
+                   };
+                    repository.getAllUsernamesFromPlaylistTable().observe(Admin_Settings_Page.this, addUserObserver);
                 }
             }
         });
@@ -150,7 +148,8 @@ public class Admin_Settings_Page extends AppCompatActivity {
             @Override
             public void onDismiss(DialogInterface dialog) {
                 // Remove observer if dialog is dismissed
-                repository.getAllUsernames().removeObservers(Admin_Settings_Page.this);
+                repository.getAllUsernamesFromPlaylistTable().removeObserver(addUserObserver);
+                addUserObserver = null;
             }
         });
         alertDialog.show();
@@ -167,28 +166,29 @@ public class Admin_Settings_Page extends AppCompatActivity {
 
         // Add ScrollView to the custom layout
         ScrollView scrollView = new ScrollView(this);
-        final LinearLayout usernamesLayout = new LinearLayout(this);
-        usernamesLayout.setOrientation(LinearLayout.VERTICAL);
-        scrollView.addView(usernamesLayout);
+        LinearLayout addUsernamesLayoutForDelete = new LinearLayout(this);
+        addUsernamesLayoutForDelete.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(addUsernamesLayoutForDelete);
         dialogLayout.addView(scrollView); // Add ScrollView to the dialog layout
 
-        LiveData<List<String>> allUsernames = repository.getAllUsernames();
+        LiveData<List<String>> allUsernamesForDeleting = repository.getAllUsernames();
 
-        allUsernames.observe(this, new Observer<List<String>>() {
+        allUsernamesForDeleting.observe(this, new Observer<List<String>>() {
             @Override
             public void onChanged(List<String> usernames) {
-                usernamesLayout.removeAllViews(); // Clear previous views
+                addUsernamesLayoutForDelete.removeAllViews(); // Clear previous views
                 if (usernames != null && !usernames.isEmpty()) {
                     for (String username : usernames) {
                         TextView textView = new TextView(Admin_Settings_Page.this);
                         textView.setText(username);
-                        usernamesLayout.addView(textView);
+                        addUsernamesLayoutForDelete.addView(textView);
                     }
                 } else {
                     TextView textView = new TextView(Admin_Settings_Page.this);
                     textView.setText("No users found.");
-                    usernamesLayout.addView(textView);
+                    addUsernamesLayoutForDelete.addView(textView);
                 }
+                repository.getAllUsernames().removeObservers(Admin_Settings_Page.this);
             }
         });
 
@@ -219,7 +219,8 @@ public class Admin_Settings_Page extends AppCompatActivity {
                                 toastMaker("User not found");
                             }
                         }
-                        repository.getUserByUserName(usernameToDelete).removeObserver(this);
+                        repository.getUserByUserName(usernameToDelete).removeObserver(userObserver);
+                        userObserver = null;
                     }
                 };
 
@@ -234,7 +235,6 @@ public class Admin_Settings_Page extends AppCompatActivity {
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                // Remove observer if dialog is dismissed
                 repository.getAllUsernames().removeObservers(Admin_Settings_Page.this);
             }
         });
@@ -258,6 +258,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
                     public void onChanged(Playlist playlist) {
                         if (playlist != null) {
                             repository.delete(playlist);
+                            repository.getPlaylistByUserName(user.getUsername()).removeObserver(this);
                         }
                     }
                 });
@@ -277,8 +278,10 @@ public class Admin_Settings_Page extends AppCompatActivity {
         alertDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialog) {
-                // Remove observer if dialog is dismissed
-                repository.getAllUsernames().removeObservers(Admin_Settings_Page.this);
+                if (userObserver != null) {
+                    repository.getUserByUserName(user.getUsername()).removeObserver(userObserver);
+                    userObserver = null;
+                }
             }
         });
         alertDialog.show();
