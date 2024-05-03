@@ -150,7 +150,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
                             showConfirmationDialog(user);
                         } else {
                             if (userObserver != null) {
-                               toastMaker("User not found");
+                                toastMaker("User not found");
                             }
                         }
                     }

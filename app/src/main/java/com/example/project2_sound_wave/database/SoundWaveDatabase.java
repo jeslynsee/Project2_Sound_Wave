@@ -34,10 +34,10 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
             synchronized (SoundWaveDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
-                            context.getApplicationContext(),
-                            SoundWaveDatabase.class,
-                                        DATABASE_NAME
-                    )
+                                    context.getApplicationContext(),
+                                    SoundWaveDatabase.class,
+                                    DATABASE_NAME
+                            )
                             .fallbackToDestructiveMigration()
                             .addCallback(addDefaultValues)
                             .build();
@@ -48,8 +48,8 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
     }
 
     private static final RoomDatabase.Callback addDefaultValues = new RoomDatabase.Callback(){
-            @Override
-            public void onCreate(@NonNull SupportSQLiteDatabase db) {
+        @Override
+        public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
             Log.i(Login_Page.TAG, "DATABASE CREATED!");
             databaseWriteExecutor.execute(() -> {

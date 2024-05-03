@@ -16,7 +16,6 @@ public class SoundWave {
     private String genre;
 
 
-
     public SoundWave(String artist, String genre) {
         this.artist = artist;
         this.genre = genre;
@@ -58,6 +57,5 @@ public class SoundWave {
     public void setGenre(String genre) {
         this.genre = genre;
     }
-
 
 }

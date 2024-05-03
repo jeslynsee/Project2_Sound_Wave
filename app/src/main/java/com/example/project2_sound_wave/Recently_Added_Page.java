@@ -22,5 +22,5 @@ public class Recently_Added_Page extends AppCompatActivity {
         return intent;
     }
 
-    // display User's playlis, select in descending order to show "recenlty added"
+    // display User's playlist, select in descending order to show "recently added"
 }
