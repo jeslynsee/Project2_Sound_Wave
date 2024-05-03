@@ -176,11 +176,14 @@ public class Admin_Settings_Page extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 repository.delete(user);
                 repository.getUserByUserName(user.getUsername()).removeObserver(userObserver);
+
                 userObserver = null;
                 repository.getPlaylistByUserName(user.getUsername()).observe(Admin_Settings_Page.this, new Observer<Playlist>() {
                     @Override
                     public void onChanged(Playlist playlist) {
-                        repository.delete(playlist);
+                        if (playlist != null) {
+                            repository.delete(playlist);
+                        }
                     }
                 });
                 toastMaker("User successfully deleted");
