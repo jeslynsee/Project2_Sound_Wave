@@ -122,57 +122,108 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
 //    }
 
-//    private int checkNextEmptySlot(String artist, String genre) {
+
+
+//    public void addArtistAndGenreToUserPlaylist(String artist, String genre) {
 //        LiveData<String> liveDataUsername = repository.getUserNameByUserId(userId);
-//         int[] slot = {-1};
 //        liveDataUsername.observe(Browse_Artists_Page.this, new Observer<String>() {
-//
 //            @Override
 //            public void onChanged(String username) {
-//                repository.getPlaylistByUserName(username).observe(Browse_Artists_Page.this, new Observer<Playlist>() {
+//                checkNextEmptySlot(artist, genre).observe(Browse_Artists_Page.this, new Observer<Integer>() {
 //                    @Override
-//                    public void onChanged(Playlist playlist) {
-//                        if (playlist.getArtist1() == null) {
-//                            slot[0] = 1;
-////                            toastMaker("Successfully added artist to playlist!");
-//                        } else if (playlist.getArtist2() == null) {
-//                            slot[0] = 2;
-////                            toastMaker("Successfully added artist to playlist!");
-//                        } else if (playlist.getArtist3() == null) {
-//                            slot[0] = 3;
-//                        } else if (playlist.getArtist4() == null) {
-//                            slot[0] = 4;
-//                        } else if (playlist.getArtist5() == null) {
-//                            slot[0] = 4;
+//                    public void onChanged(Integer slot) {
+//                        toastMaker(String.format(Locale.ENGLISH, "Next empty slot = %d", slot));
+//                        if (slot == 1) {
+//                            repository.getArtist1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+//                                @Override
+//                                public void onChanged(String artistInTable) {
+//                                    repository.updateArtist1(artist, username);
+//                                    toastMaker("Successfully added artist to playlist!");
+//                                    // remove artist observer
+//                                    repository.getArtist1(username).removeObserver(this);
+//
+//                            repository.getGenre1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+//                                @Override
+//                                public void onChanged(String genreInTable) {
+//                                    repository.updateGenre1(genre, username);
+//                                    //remove genre observer
+//                                    repository.getGenre1(username).removeObserver(this);
+//                                }
+//                            });
+//                        }
+//
+//                    });
+//
 //                        }
 //                    }
 //                });
-//
 //            }
 //        });
-//        return slot[0];
 //    }
-
 
     public void addArtistAndGenreToUserPlaylist(String artist, String genre) {
         LiveData<String> liveDataUsername = repository.getUserNameByUserId(userId);
+
         liveDataUsername.observe(Browse_Artists_Page.this, new Observer<String>() {
+            LiveData<Integer> slotLiveData = checkNextEmptySlot();
             @Override
             public void onChanged(String username) {
-                checkNextEmptySlot(artist, genre).observe(Browse_Artists_Page.this, new Observer<Integer>() {
+                slotLiveData.observe(Browse_Artists_Page.this, new Observer<Integer>() {
                     @Override
                     public void onChanged(Integer slot) {
-                        toastMaker(String.format(Locale.ENGLISH, "Next empty slot = %d", slot));
                         if (slot == 1) {
+                            repository.getArtist1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    boolean toastShown = false;
+                                    repository.updateArtist1(artist, username);
+                                        toastMaker("Successfully added artist to playlist!");
 
+                                    // Remove artist observer
+                                    repository.getArtist1(username).removeObserver(this);
+
+                                    repository.getGenre1(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                        @Override
+                                        public void onChanged(String genreInTable) {
+                                            repository.updateGenre1(genre, username);
+                                            // Remove genre observer
+                                            repository.getGenre1(username).removeObserver(this);
+                                        }
+                                    });
+                                }
+                            });
                         }
+
+                        if (slot == 2) {
+                            repository.getArtist2(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist2(artist, username);
+                                    toastMaker("Successfully added artist to playlist!");
+                                    // Remove artist observer
+                                    repository.getArtist2(username).removeObserver(this);
+
+                                    repository.getGenre2(username).observe(Browse_Artists_Page.this, new Observer<String>() {
+                                        @Override
+                                        public void onChanged(String genreInTable) {
+                                            repository.updateGenre2(genre, username);
+                                            // Remove genre observer
+                                            repository.getGenre2(username).removeObserver(this);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                        slotLiveData.removeObserver(this);
                     }
+
                 });
             }
         });
     }
 
-    private LiveData<Integer> checkNextEmptySlot(String artist, String genre) {
+
+    private LiveData<Integer> checkNextEmptySlot() {
         MutableLiveData<Integer> slotLiveData = new MutableLiveData<>();
         LiveData<String> liveDataUsername = repository.getUserNameByUserId(userId);
 
@@ -182,17 +233,26 @@ public class Browse_Artists_Page extends AppCompatActivity {
                 repository.getPlaylistByUserName(username).observe(Browse_Artists_Page.this, new Observer<Playlist>() {
                     @Override
                     public void onChanged(Playlist playlist) {
+                        int slot = -1;
                         if (playlist.getArtist1() == null) {
-                            slotLiveData.setValue(1);
+                            slot = 1;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
                         } else if (playlist.getArtist2() == null) {
-                            slotLiveData.setValue(2);
+//                            slotLiveData.setValue(2);
+                            slot = 2;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
                         } else if (playlist.getArtist3() == null) {
-                            slotLiveData.setValue(3);
+//                            slotLiveData.setValue(3);
+                            slot = 3;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
                         } else if (playlist.getArtist4() == null) {
-                            slotLiveData.setValue(4);
+                            slot = 4;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
                         } else if (playlist.getArtist5() == null) {
-                            slotLiveData.setValue(5);
+                            slot = 5;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
                         }
+                        slotLiveData.setValue(slot);
                     }
                 });
             }

@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.UserDAO;
+import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivityAdminSettingsPageBinding;
 
@@ -176,6 +177,12 @@ public class Admin_Settings_Page extends AppCompatActivity {
                 repository.delete(user);
                 repository.getUserByUserName(user.getUsername()).removeObserver(userObserver);
                 userObserver = null;
+                repository.getPlaylistByUserName(user.getUsername()).observe(Admin_Settings_Page.this, new Observer<Playlist>() {
+                    @Override
+                    public void onChanged(Playlist playlist) {
+                        repository.delete(playlist);
+                    }
+                });
                 toastMaker("User successfully deleted");
                 dialog.dismiss();
             }

@@ -17,7 +17,7 @@ import com.example.project2_sound_wave.database.entities.User;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 8, exportSchema = false)
+@Database(entities = {SoundWave.class, User.class, Playlist.class}, version = 9, exportSchema = false)
 public abstract class SoundWaveDatabase extends RoomDatabase {
     public static final String USER_TABLE = "usertable";
     private static final String DATABASE_NAME = "SoundWavedatabase";
@@ -154,7 +154,7 @@ public abstract class SoundWaveDatabase extends RoomDatabase {
                 genres.insert(Artist44);
                 SoundWave Artist45 = new SoundWave("Drake", "Rap");
                 genres.insert(Artist45);
-                SoundWave Artist46 = new SoundWave("Micheal Jackson", "R and B");
+                SoundWave Artist46 = new SoundWave("Michael Jackson", "R and B");
                 genres.insert(Artist46);
                 SoundWave Artist47 = new SoundWave("Chris Brown", "R and B");
                 genres.insert(Artist47);
