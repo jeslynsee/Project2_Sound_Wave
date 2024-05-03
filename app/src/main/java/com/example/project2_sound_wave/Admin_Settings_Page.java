@@ -50,46 +50,46 @@ public class Admin_Settings_Page extends AppCompatActivity {
         binding.addUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showAddUserDialog();
+//                showAddUserDialog();
             }
         });
     }
 
-    private void showAddUserDialog() {
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Admin_Settings_Page.this);
-        alertBuilder.setTitle("All Users");
-
-        LinearLayout dialogLayout = new LinearLayout(this);
-        dialogLayout.setOrientation(LinearLayout.VERTICAL);
-
-        ScrollView scrollView = new ScrollView(this);
-        final LinearLayout usernamesLayout = new LinearLayout(this);
-        usernamesLayout.setOrientation(LinearLayout.VERTICAL);
-        scrollView.addView(usernamesLayout);
-        dialogLayout.addView(scrollView); // Add ScrollView to the dialog layout
-
-        LiveData<List<String>> allUsernames = repository.getAllUsernames();
-
-        allUsernames.observe(this, new Observer<List<String>>() {
-            @Override
-            public void onChanged(List<String> usernames) {
-                usernamesLayout.removeAllViews(); // Clear previous views
-                if (usernames != null && !usernames.isEmpty()) {
-                    for (String username : usernames) {
-                        TextView textView = new TextView(Admin_Settings_Page.this);
-                        textView.setText(username);
-                        usernamesLayout.addView(textView);
-                    }
-                } else {
-                    TextView textView = new TextView(Admin_Settings_Page.this);
-                    textView.setText("No users found.");
-                    usernamesLayout.addView(textView);
-                }
-            }
-        });
-
-        //TODO: Finishing implementing alertDialog
-    }
+//    private void showAddUserDialog() {
+//        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Admin_Settings_Page.this);
+//        alertBuilder.setTitle("All Users");
+//
+//        LinearLayout dialogLayout = new LinearLayout(this);
+//        dialogLayout.setOrientation(LinearLayout.VERTICAL);
+//
+//        ScrollView scrollView = new ScrollView(this);
+//        final LinearLayout usernamesLayout = new LinearLayout(this);
+//        usernamesLayout.setOrientation(LinearLayout.VERTICAL);
+//        scrollView.addView(usernamesLayout);
+//        dialogLayout.addView(scrollView); // Add ScrollView to the dialog layout
+//
+//        LiveData<List<String>> allUsernames = repository.getAllUsernames();
+//
+//        allUsernames.observe(this, new Observer<List<String>>() {
+//            @Override
+//            public void onChanged(List<String> usernames) {
+//                usernamesLayout.removeAllViews(); // Clear previous views
+//                if (usernames != null && !usernames.isEmpty()) {
+//                    for (String username : usernames) {
+//                        TextView textView = new TextView(Admin_Settings_Page.this);
+//                        textView.setText(username);
+//                        usernamesLayout.addView(textView);
+//                    }
+//                } else {
+//                    TextView textView = new TextView(Admin_Settings_Page.this);
+//                    textView.setText("No users found.");
+//                    usernamesLayout.addView(textView);
+//                }
+//            }
+//        });
+//
+//        //TODO: Finishing implementing alertDialog
+//    }
 
     private void showDeleteUserDialog() {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Admin_Settings_Page.this);
