@@ -13,7 +13,7 @@ public class User {
     private int id;
 
     private String username;
-    private String password; // needs to be changed, should use hashing function
+    private String password;
 
     private boolean isAdmin;
 

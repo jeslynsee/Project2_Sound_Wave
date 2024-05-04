@@ -14,8 +14,6 @@ import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivitySignUpPageBinding;
 
-import java.util.ArrayList;
-
 public class Sign_Up_Page extends AppCompatActivity {
     ActivitySignUpPageBinding binding;
     SoundWaveRepository repository;

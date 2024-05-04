@@ -69,7 +69,7 @@ public class Options_Page extends AppCompatActivity {
         binding.recentlyAddedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = Recently_Added_Page.recentlyAddedPageIntentFactory(getApplicationContext());
+               Intent intent = Recently_Added_Page.recentlyAddedPageIntentFactory(getApplicationContext(), loggedInUserId);
                startActivity(intent);
             }
         });
