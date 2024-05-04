@@ -991,12 +991,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    static Intent mainActivityIntentFactory(Context context, int userId) {
-        Intent intent = new Intent(context, MainActivity.class);
-        intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
-        return intent;
-
-    }
 
     public void addArtisttoPlaylist(String artist , String genre){
         LiveData<String> username = repository.getUserNameByUserId(userId);
@@ -1163,7 +1157,11 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-
+    static Intent mainActivityIntentFactory(Context context, int userId) {
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
+        return intent;
+    }
 
 }
 
