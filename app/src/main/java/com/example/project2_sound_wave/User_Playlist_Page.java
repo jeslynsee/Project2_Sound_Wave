@@ -31,6 +31,7 @@ private int userId;
         setContentView(binding.getRoot());
         repository = SoundWaveRepository.getRepository(getApplication());
         displayPlaylist();
+        userId = getIntent().getIntExtra(BROWSE_ARTISTS_KEY,0);
 
 
 
@@ -39,8 +40,10 @@ private int userId;
             @Override
             public void onClick(View v) {
                 // Call the method to clear the table
+                clearPlaylist();
 
                 // Optionally, notify the user that data has been cleared
+
                 Toast.makeText(getApplicationContext(), "Playlist cleared", Toast.LENGTH_SHORT).show();
             }
         });
@@ -71,7 +74,89 @@ private int userId;
 
                    }
                });
+                repository.getArtist2(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String artist2) {
+                        if(artist2 != null){
+                            repository.updateArtist2(null, username);
+                        }
+
+                    }
+                });
+                repository.getArtist3(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String artist3) {
+                        if(artist3 != null){
+                            repository.updateArtist3(null, username);
+                        }
+
+                    }
+                });
+                repository.getArtist4(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String artist4) {
+                        if(artist4 != null){
+                            repository.updateArtist4(null, username);
+                        }
+
+                    }
+                });
+                repository.getArtist5(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String artist5) {
+                        if(artist5 != null){
+                            repository.updateArtist5(null, username);
+                        }
+
+                    }
+                });
+                repository.getGenre1(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String genre1) {
+                        if(genre1 != null){
+                            repository.updateGenre1(null, username);
+                        }
+
+                    }
+                });
+                repository.getGenre2(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String genre2) {
+                        if(genre2 != null){
+                            repository.updateGenre2(null, username);
+                        }
+
+                    }
+                });
+                repository.getGenre3(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String genre3) {
+                        if(genre3 != null){
+                            repository.updateGenre3(null, username);
+                        }
+
+                    }
+                });
+                repository.getGenre4(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String genre4) {
+                        if(genre4 != null){
+                            repository.updateGenre4(null, username);
+                        }
+
+                    }
+                });
+                repository.getGenre5(username).observe(User_Playlist_Page.this, new Observer<String>() {
+                    @Override
+                    public void onChanged(String genre5) {
+                        if(genre5 != null){
+                            repository.updateGenre5(null, username);
+                        }
+
+                    }
+                });
             }
+
 
 
         });

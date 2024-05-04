@@ -53,7 +53,7 @@ public class Options_Page extends AppCompatActivity {
         binding.myPlaylistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = User_Playlist_Page.userPlaylistIntentFactory(getApplicationContext());
+                Intent intent = User_Playlist_Page.userPlaylistIntentFactory(getApplicationContext(), loggedInUserId);
                 startActivity(intent);
             }
         });
