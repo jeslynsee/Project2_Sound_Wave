@@ -55,4 +55,6 @@
     <string name="clear_playlist">Clear Playlist</string>
     <string name="view_users">View Users</string>
     <string name="delete_artist">Delete Artist</string>
+    <string name="no_artists_found">No artists found.</string>
+    <string name="view_artists">View Artists</string>
 </resources>

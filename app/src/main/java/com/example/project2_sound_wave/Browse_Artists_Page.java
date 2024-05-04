@@ -50,7 +50,7 @@ public class Browse_Artists_Page extends AppCompatActivity {
 
 
     private void populateArtistList(LinearLayout artistList) {
-        ArrayList<SoundWave> soundWaveData = repository.getAllLogs();
+        ArrayList<SoundWave> soundWaveData = repository.getAllSoundWaves();
 
         //using enhanced for loop to go through all the artists in SoundWave db to display
         for (SoundWave data : soundWaveData) {

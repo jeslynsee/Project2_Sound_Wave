@@ -20,11 +20,13 @@ import android.widget.Toast;
 import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.UserDAO;
 import com.example.project2_sound_wave.database.entities.Playlist;
+import com.example.project2_sound_wave.database.entities.SoundWave;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivityAdminSettingsPageBinding;
 
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class Admin_Settings_Page extends AppCompatActivity {
@@ -61,6 +63,135 @@ public class Admin_Settings_Page extends AppCompatActivity {
                 showAddUserDialog();
             }
         });
+
+        binding.viewArtistsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showArtistListDialog();
+            }
+        });
+
+        binding.deleteArtistButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDeleteArtistDialog();
+            }
+        });
+    }
+
+    private void showDeleteArtistDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Admin_Settings_Page.this);
+        alertBuilder.setTitle("Deleting Artist");
+
+        LinearLayout dialogLayout = new LinearLayout(this);
+        dialogLayout.setOrientation(LinearLayout.VERTICAL);
+
+        EditText editText = new EditText(this);
+        editText.setHint("Enter artist to delete");
+        dialogLayout.addView(editText);
+
+        alertBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (editText.getText().toString().isEmpty()) {
+                    toastMaker("Please enter artist to delete");
+                    dialog.dismiss();
+                } else {
+                    String artistToDelete = editText.getText().toString();
+                    List<SoundWave> allArtistsToDisplay = repository.getAllSoundWaves();
+                    for (SoundWave artistInfo : allArtistsToDisplay) {
+                        if (artistInfo.getArtist().equals(artistToDelete)) {
+                            showArtistDeleteConfirmation(artistToDelete);
+                            break;
+                        }
+                        toastMaker("Artist not found. Enter valid artist to delete");
+                        dialog.dismiss();
+                    }
+                }
+            }
+        });
+
+        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alertBuilder.setView(dialogLayout);
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
+
+    }
+
+    private void showArtistDeleteConfirmation(String artistToDelete) {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Admin_Settings_Page.this);
+        alertBuilder.setTitle("Delete Artist");
+        alertBuilder.setMessage("Are you sure you want to delete this artist?");
+
+        alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                List<SoundWave> allArtistsToDisplay = repository.getAllSoundWaves();
+                for (SoundWave artistInfo : allArtistsToDisplay) {
+                    if (artistInfo.getArtist().equals(artistToDelete)) {
+                        repository.delete(artistInfo);
+                        toastMaker("Artist successfully delete!");
+                        break;
+                    }
+                }
+            }
+        });
+
+        alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
+
+    }
+
+    private void showArtistListDialog() {
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(Admin_Settings_Page.this);
+        alertBuilder.setTitle("All Artists");
+
+        LinearLayout dialogLayout = new LinearLayout(this);
+        dialogLayout.setOrientation(LinearLayout.VERTICAL);
+
+        ScrollView scrollView = new ScrollView(this);
+        LinearLayout addArtistsLayoutDisplay = new LinearLayout(this);
+        addArtistsLayoutDisplay.setOrientation(LinearLayout.VERTICAL);
+        scrollView.addView(addArtistsLayoutDisplay);
+        dialogLayout.addView(scrollView);
+
+        List<SoundWave> allArtistsToDisplay = repository.getAllSoundWaves();
+        if (allArtistsToDisplay != null) {
+            addArtistsLayoutDisplay.removeAllViews();
+            for (SoundWave artistInfo : allArtistsToDisplay) {
+                TextView artistTextView = new TextView(Admin_Settings_Page.this);
+                artistTextView.setText(artistInfo.getArtist());
+                addArtistsLayoutDisplay.addView(artistTextView);
+            }
+        } else {
+            TextView textView = new TextView(Admin_Settings_Page.this);
+            textView.setText(R.string.no_artists_found);
+            addArtistsLayoutDisplay.addView(textView);
+        }
+
+        alertBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        alertBuilder.setView(dialogLayout);
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
     }
 
     private void showListOfUsersDialog() {
@@ -90,10 +221,17 @@ public class Admin_Settings_Page extends AppCompatActivity {
                     }
                 } else {
                     TextView textView = new TextView(Admin_Settings_Page.this);
-                    textView.setText("No users found.");
+                    textView.setText(R.string.no_artists_found);
                     addUsernamesLayoutToDisplay.addView(textView);
                 }
                 repository.getAllUsernames().removeObservers(Admin_Settings_Page.this);
+            }
+        });
+
+        alertBuilder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();;
             }
         });
 

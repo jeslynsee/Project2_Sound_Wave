@@ -20,9 +20,10 @@ public interface SoundWaveDAO {
     void delete(SoundWave soundWave);
 
     @Query("Select * from " + SoundWaveDatabase.SOUND_WAVE_TABLE)
-    List<SoundWave> getAllRecords();
+    List<SoundWave> getAllSoundWaves();
 
     @Query("DELETE from " + SoundWaveDatabase.SOUND_WAVE_TABLE)
     void deleteAll();
+
 
 }

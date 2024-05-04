@@ -30,7 +30,7 @@ public class SoundWaveRepository {
         this.soundWaveDAO = db.soundWaveDAO();
         this.userDAO = db.userDAO();
         this.playlistDAO = db.playlistDAO();
-        this.allLogs = (ArrayList<SoundWave>) this.soundWaveDAO.getAllRecords();
+        this.allLogs = (ArrayList<SoundWave>) this.soundWaveDAO.getAllSoundWaves();
     }
 
     public static SoundWaveRepository getRepository(Application application) {
@@ -53,12 +53,12 @@ public class SoundWaveRepository {
         return null;
     }
 
-    public ArrayList<SoundWave> getAllLogs() {
+    public ArrayList<SoundWave> getAllSoundWaves() {
         Future<ArrayList<SoundWave>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
                 new Callable<ArrayList<SoundWave>>() {
                     @Override
                     public ArrayList<SoundWave> call() throws Exception {
-                        return (ArrayList<SoundWave>) soundWaveDAO.getAllRecords();
+                        return (ArrayList<SoundWave>) soundWaveDAO.getAllSoundWaves();
                     }
                 }
         );
