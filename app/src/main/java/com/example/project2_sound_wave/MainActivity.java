@@ -18,10 +18,6 @@ import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 
-
-
-
-
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
@@ -143,6 +139,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedAltArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedAltArtist,altGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -179,6 +185,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedBluesArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedBluesArtist,bluesGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -215,6 +231,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedChillArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedChillArtist,chillGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -251,6 +277,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedClassicalArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedClassicalArtist,classicalGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -289,6 +325,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedCountryArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedCountryArtist,countryGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -328,6 +374,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedElectronicArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedElectronicArtist,electronicGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -367,6 +423,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedFolkArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedFolkArtist,folkGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -405,6 +471,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedHipHopArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedHipHopArtist,hiphopGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -443,6 +519,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedIndieArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedIndieArtist,indieGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -482,6 +568,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedJazzArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedJazzArtist,jazzGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -521,6 +617,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedLatinArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedLatinArtist,latinGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -560,6 +666,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedMetalArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedMetalArtist,metalGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -598,6 +714,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedOperaArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedOperaArtist,operaGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -636,6 +762,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedPsychedelicArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedPsychedelicArtist,psychedelicGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -674,6 +810,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedRapArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedRapArtist,rapGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -713,6 +859,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedRandBArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedRandBArtist,randbGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -751,6 +907,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedSoulArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedSoulArtist,soulGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -790,6 +956,16 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedTrapArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
                         addArtisttoPlaylist(selectedTrapArtist,trapGenre);
                         dialog.dismiss();
+                        LiveData<Integer> slotLiveData = checkNextEmptySlot();
+                        slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                            @Override
+                            public void onChanged(Integer slot) {
+                                if (slot == 5) {
+                                    toastMaker("Playlist limit exceeded. Please clear playlist to add new artist");
+                                }
+                                slotLiveData.removeObserver(this);
+                            }
+                        });
 
                     }
                 });
@@ -982,6 +1158,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return slotLiveData;
+    }
+    private void toastMaker(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 

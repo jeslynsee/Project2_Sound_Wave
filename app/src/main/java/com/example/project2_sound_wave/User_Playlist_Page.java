@@ -1,11 +1,9 @@
 package com.example.project2_sound_wave;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
-import com.example.project2_sound_wave.database.SoundWaveDatabase;
 import com.example.project2_sound_wave.database.SoundWaveRepository;
 import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.databinding.ActivityUserPlaylistPageBinding;

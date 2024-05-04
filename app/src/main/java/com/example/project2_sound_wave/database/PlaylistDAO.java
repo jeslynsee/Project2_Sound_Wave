@@ -6,12 +6,9 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import com.example.project2_sound_wave.database.entities.Playlist;
-import com.example.project2_sound_wave.database.entities.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Dao
