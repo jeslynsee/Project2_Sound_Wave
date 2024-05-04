@@ -107,8 +107,8 @@ public class SoundWaveRepository {
     }
 
     public LiveData<String> getGenre5(String username) {
-        return playlistDAO.getGenre5(username);
-    }
+        return playlistDAO.getGenre5(username);}
+
 
     public void updateArtist1(String artist, String username) {
         SoundWaveDatabase.databaseWriteExecutor.execute(() ->
@@ -232,22 +232,22 @@ public class SoundWaveRepository {
     }
 
 
-public LiveData<List<User>> getAllUsers() {
-    Future<LiveData<List<User>>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
-            new Callable<LiveData<List<User>>>() {
-                @Override
-                public LiveData<List<User>> call() throws Exception {
-                    return userDAO.getAllUsers();
+    public LiveData<List<User>> getAllUsers() {
+        Future<LiveData<List<User>>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<LiveData<List<User>>>() {
+                    @Override
+                    public LiveData<List<User>> call() throws Exception {
+                        return userDAO.getAllUsers();
+                    }
                 }
-            }
-    );
-    try {
-        return future.get();
-    } catch (InterruptedException | ExecutionException e) {
-        Log.i(Login_Page.TAG, "Problem getting all users in repository");
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(Login_Page.TAG, "Problem getting all users in repository");
+        }
+        return null;
     }
-    return null;
-}
 
     public LiveData<List<String>> getAllUsernames() {
         Future<LiveData<List<String>>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
@@ -255,6 +255,23 @@ public LiveData<List<User>> getAllUsers() {
                     @Override
                     public LiveData<List<String>> call() throws Exception {
                         return userDAO.getAllUsernames();
+                    }
+                }
+        );
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.i(Login_Page.TAG, "Problem getting all usernames in repository");
+        }
+        return null;
+    }
+
+    public LiveData<List<String>> getAllUsernamesFromPlaylistTable() {
+        Future<LiveData<List<String>>> future = SoundWaveDatabase.databaseWriteExecutor.submit(
+                new Callable<LiveData<List<String>>>() {
+                    @Override
+                    public LiveData<List<String>> call() throws Exception {
+                        return playlistDAO.getAllUsernamesFromPlaylistTable();
                     }
                 }
         );

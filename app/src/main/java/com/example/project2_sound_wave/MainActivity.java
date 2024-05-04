@@ -3,6 +3,9 @@ package com.example.project2_sound_wave;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -19,6 +22,8 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 
+import com.example.project2_sound_wave.database.SoundWaveRepository;
+import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 
@@ -29,6 +34,9 @@ import com.example.project2_sound_wave.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private static final String MAIN_ACTIVITY_USER_ID = "com.example.project2_sound_wave.MAIN_ACTIVITY_USER_ID";
     ActivityMainBinding binding;
+    SoundWaveRepository repository;
+    private int userId;
+
 
     Button Altbutton;
     Button Bluesbutton;
@@ -50,22 +58,44 @@ public class MainActivity extends AppCompatActivity {
     Button Trapbutton;
 
 
+    String altGenre = "Alt";
+    String bluesGenre = "Blues";
+    String chillGenre = "Chill";
+    String classicalGenre = "Classical";
+    String countryGenre = "Country";
+    String electronicGenre = "Electronic";
+
+    String folkGenre = "Folk";
+    String hiphopGenre = "Hip-Hop";
+    String indieGenre = "Indie";
+
+    String jazzGenre = "Jazz";
+    String latinGenre = "Latin";
+    String metalGenre = "Metal";
+    String operaGenre = "Opera";
+    String psychedelicGenre = "Psychedelic";
+    String rapGenre = "Rap";
+    String randbGenre = "R and B";
+    String soulGenre = "Soul";
+    String trapGenre = "Trap";
+
+
     String selectedAltArtist = "Tame Impala";
     String selectedBluesArtist = "Ray Charles";
-    String selectedChillArtist = "Jaden";
+    String selectedChillArtist = "Mac Miller";
     String selectedClassicalArtist = "Vivaldi";
-    String selectedCountryArtist = "Taylor Swift";
+    String selectedCountryArtist = "Johnny Cash";
     String selectedElectronicArtist = "Daft Punk";
     String selectedFolkArtist = "Bob Dylan";
     String selectedHipHopArtist = "Eminem";
     String selectedIndieArtist = "Imagine Dragons";
     String selectedJazzArtist = "Louis Armstrong";
     String selectedLatinArtist = "Vicente Fernández";
-    String selectedMetalArtist = "KISS";
+    String selectedMetalArtist = "Guns N' Roses";
     String selectedOperaArtist = "Luciano Pavarotti";
     String selectedPsychedelicArtist = "A$AP Rocky";
     String selectedRapArtist = "J. Cole";
-    String selectedRandBArtist = "Chris Brown";
+    String selectedRandBArtist = "Micheal Jackson";
     String selectedSoulArtist = "Otis Redding";
     String selectedTrapArtist = "Travis Scott";
 
@@ -95,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
         Trapbutton = findViewById(R.id.Button18);
 
         setContentView(binding.getRoot());
+        repository = SoundWaveRepository.getRepository(getApplication());
+        userId = getIntent().getIntExtra(MAIN_ACTIVITY_USER_ID,0);
 
 
         binding.Button1.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedAltArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedAltArtist,altGenre);
                         dialog.dismiss();
                     }
                 });
@@ -153,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedBluesArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedBluesArtist,bluesGenre);
                         dialog.dismiss();
                     }
                 });
@@ -188,7 +222,9 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedChillArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedChillArtist,chillGenre);
                         dialog.dismiss();
+
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -222,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedClassicalArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedClassicalArtist,classicalGenre);
                         dialog.dismiss();
 
                     }
@@ -259,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedCountryArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedCountryArtist,countryGenre);
                         dialog.dismiss();
 
                     }
@@ -297,6 +335,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedElectronicArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedElectronicArtist,electronicGenre);
                         dialog.dismiss();
 
                     }
@@ -335,6 +374,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedFolkArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedFolkArtist,folkGenre);
                         dialog.dismiss();
 
                     }
@@ -372,6 +412,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedHipHopArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedHipHopArtist,hiphopGenre);
                         dialog.dismiss();
 
                     }
@@ -409,6 +450,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedIndieArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedIndieArtist,indieGenre);
                         dialog.dismiss();
 
                     }
@@ -447,6 +489,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedJazzArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedJazzArtist,jazzGenre);
                         dialog.dismiss();
 
                     }
@@ -485,6 +528,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedLatinArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedLatinArtist,latinGenre);
                         dialog.dismiss();
 
                     }
@@ -523,6 +567,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedMetalArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedMetalArtist,metalGenre);
                         dialog.dismiss();
 
                     }
@@ -560,6 +605,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedOperaArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedOperaArtist,operaGenre);
                         dialog.dismiss();
 
                     }
@@ -597,6 +643,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedPsychedelicArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedPsychedelicArtist,psychedelicGenre);
                         dialog.dismiss();
 
                     }
@@ -634,6 +681,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedRapArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedRapArtist,rapGenre);
                         dialog.dismiss();
 
                     }
@@ -672,6 +720,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedRandBArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedRandBArtist,randbGenre);
                         dialog.dismiss();
 
                     }
@@ -709,6 +758,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedSoulArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedSoulArtist,soulGenre);
                         dialog.dismiss();
 
                     }
@@ -747,6 +797,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(MainActivity.this, "You Added: " + selectedTrapArtist + " to your playlist. ", Toast.LENGTH_SHORT).show();
+                        addArtisttoPlaylist(selectedTrapArtist,trapGenre);
                         dialog.dismiss();
 
                     }
@@ -765,7 +816,7 @@ public class MainActivity extends AppCompatActivity {
         binding.PlaylistButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = User_Playlist_Page.userPlaylistIntentFactory(getApplicationContext());
+                Intent intent = User_Playlist_Page.userPlaylistIntentFactory(getApplicationContext(), userId);
                 startActivity(intent);
             }
         });
@@ -773,10 +824,173 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    static Intent mainActivityIntentFactory(Context context) {
+    static Intent mainActivityIntentFactory(Context context, int userId) {
         Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(MAIN_ACTIVITY_USER_ID, userId);
         return intent;
 
+    }
+
+    public void addArtisttoPlaylist(String artist , String genre){
+        LiveData<String> username = repository.getUserNameByUserId(userId);
+        username.observe(MainActivity.this, new Observer<String>() {
+            LiveData<Integer> slotLiveData = checkNextEmptySlot();
+            @Override
+            public void onChanged(String username) {
+                // returned slotLiveData as Live Integer and when observed, able to check Integer value to see what is next available slot for artist/genre popualtion
+                slotLiveData.observe(MainActivity.this, new Observer<Integer>() {
+                    @Override
+                    public void onChanged(Integer slot) {
+                        if (slot == 1) {
+                            repository.getArtist1(username).observe(MainActivity.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist1(artist, username);
+
+                                    // Remove artist observer
+                                    repository.getArtist1(username).removeObserver(this);
+
+                                    repository.getGenre1(username).observe(MainActivity.this, new Observer<String>() {
+                                        @Override
+                                        public void onChanged(String genreInTable) {
+                                            repository.updateGenre1(genre, username);
+                                            // Remove genre observer
+                                            repository.getGenre1(username).removeObserver(this);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        if (slot == 2) {
+                            repository.getArtist2(username).observe(MainActivity.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist2(artist, username);
+                                    // Remove artist observer
+                                    repository.getArtist2(username).removeObserver(this);
+
+                                    repository.getGenre2(username).observe(MainActivity.this, new Observer<String>() {
+                                        @Override
+                                        public void onChanged(String genreInTable) {
+                                            repository.updateGenre2(genre, username);
+                                            // Remove genre observer
+                                            repository.getGenre2(username).removeObserver(this);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        if (slot == 3) {
+                            repository.getArtist3(username).observe(MainActivity.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist3(artist, username);
+                                    // Remove artist observer
+                                    repository.getArtist3(username).removeObserver(this);
+
+                                    repository.getGenre3(username).observe(MainActivity.this, new Observer<String>() {
+                                        @Override
+                                        public void onChanged(String genreInTable) {
+                                            repository.updateGenre3(genre, username);
+                                            // Remove genre observer
+                                            repository.getGenre3(username).removeObserver(this);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        if (slot == 4) {
+                            repository.getArtist4(username).observe(MainActivity.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist4(artist, username);
+                                    // Remove artist observer
+                                    repository.getArtist4(username).removeObserver(this);
+
+                                    repository.getGenre4(username).observe(MainActivity.this, new Observer<String>() {
+                                        @Override
+                                        public void onChanged(String genreInTable) {
+                                            repository.updateGenre4(genre, username);
+                                            // Remove genre observer
+                                            repository.getGenre4(username).removeObserver(this);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+
+                        if (slot == 5) {
+                            repository.getArtist5(username).observe(MainActivity.this, new Observer<String>() {
+                                @Override
+                                public void onChanged(String artistInTable) {
+                                    repository.updateArtist5(artist, username);
+                                    // Remove artist observer
+                                    repository.getArtist5(username).removeObserver(this);
+
+                                    repository.getGenre5(username).observe(MainActivity.this, new Observer<String>() {
+                                        @Override
+                                        public void onChanged(String genreInTable) {
+                                            repository.updateGenre5(genre, username);
+                                            // Remove genre observer
+                                            repository.getGenre5(username).removeObserver(this);
+                                        }
+                                    });
+                                }
+                            });
+
+                        }
+
+                        slotLiveData.removeObserver(this);
+                    }
+
+                });
+            }
+        });
+
+
+
+    }
+
+    private LiveData<Integer> checkNextEmptySlot() {
+        // had to use Mutable Live Data in order to keep track of Live Data somehow to figure out next empty slot
+        MutableLiveData<Integer> slotLiveData = new MutableLiveData<>();
+        LiveData<String> liveDataUsername = repository.getUserNameByUserId(userId);
+
+        liveDataUsername.observe(MainActivity.this, new Observer<String>() {
+            @Override
+            public void onChanged(String username) {
+                repository.getPlaylistByUserName(username).observe(MainActivity.this, new Observer<Playlist>() {
+                    @Override
+                    public void onChanged(Playlist playlist) {
+                        int slot = -1;
+                        if (playlist.getArtist1() == null) {
+                            slot = 1;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
+                        } else if (playlist.getArtist2() == null) {
+                            slot = 2;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
+                        } else if (playlist.getArtist3() == null) {
+                            slot = 3;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
+                        } else if (playlist.getArtist4() == null) {
+                            slot = 4;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
+                        } else if (playlist.getArtist5() == null) {
+                            slot = 5;
+                            repository.getPlaylistByUserName(username).removeObserver(this);
+
+                        }
+                        slotLiveData.setValue(slot);
+
+                    }
+                });
+            }
+        });
+
+        return slotLiveData;
     }
 
 

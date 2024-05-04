@@ -18,6 +18,59 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <TextView
+        android:id="@+id/Artist1"
+        android:layout_width="272dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
+        app:layout_constraintVertical_bias="0.122" />
+
+    <TextView
+        android:id="@+id/Artist2"
+        android:layout_width="272dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
+        app:layout_constraintVertical_bias="0.255" />
+
+    <TextView
+        android:id="@+id/Artist3"
+        android:layout_width="272dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
+        app:layout_constraintVertical_bias="0.388" />
+
+    <TextView
+        android:id="@+id/Artist4"
+        android:layout_width="272dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <TextView
+        android:id="@+id/Artist5"
+        android:layout_width="272dp"
+        android:layout_height="80dp"
+
+        android:layout_marginStart="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
+        app:layout_constraintVertical_bias="0.653" />
+
     <Button
         android:id="@+id/clear_playlist_button"
         android:layout_width="wrap_content"
