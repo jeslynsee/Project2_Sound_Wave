@@ -93,6 +93,7 @@ public class Admin_Settings_Page extends AppCompatActivity {
         alertBuilder.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                boolean isFound = false;
                 if (editText.getText().toString().isEmpty()) {
                     toastMaker("Please enter artist to delete");
                     dialog.dismiss();
@@ -102,11 +103,15 @@ public class Admin_Settings_Page extends AppCompatActivity {
                     for (SoundWave artistInfo : allArtistsToDisplay) {
                         if (artistInfo.getArtist().equals(artistToDelete)) {
                             showArtistDeleteConfirmation(artistToDelete);
+                            isFound = true;
                             break;
                         }
-                        toastMaker("Artist not found. Enter valid artist to delete");
-                        dialog.dismiss();
                     }
+
+                    if (!isFound) {
+                        toastMaker("Artist not found. Enter valid artist to delete");
+                    }
+
                 }
             }
         });
