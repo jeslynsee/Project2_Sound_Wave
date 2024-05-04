@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -18,16 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project2_sound_wave.database.SoundWaveRepository;
-import com.example.project2_sound_wave.database.UserDAO;
 import com.example.project2_sound_wave.database.entities.Playlist;
 import com.example.project2_sound_wave.database.entities.SoundWave;
 import com.example.project2_sound_wave.database.entities.User;
 import com.example.project2_sound_wave.databinding.ActivityAdminSettingsPageBinding;
 
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Locale;
-import java.util.Objects;
 
 public class Admin_Settings_Page extends AppCompatActivity {
     ActivityAdminSettingsPageBinding binding;
