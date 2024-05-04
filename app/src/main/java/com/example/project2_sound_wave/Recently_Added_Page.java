@@ -43,6 +43,14 @@ public class Recently_Added_Page extends AppCompatActivity {
                 Toast.makeText(Recently_Added_Page.this, "Successfully cleared your Recently Added!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        binding.addArtistRedirectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Browse_Artists_Page.browseArtistsPageIntentFactory(getApplicationContext(), userId);
+                startActivity(intent);
+            }
+        });
     }
 
     private void displayRecentlyAddedArtists() {
