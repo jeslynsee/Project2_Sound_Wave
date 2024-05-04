@@ -47,6 +47,13 @@ private int userId;
                 Toast.makeText(getApplicationContext(), "Playlist cleared", Toast.LENGTH_SHORT).show();
             }
         });
+        binding.goBackButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = Options_Page.optionsPageIntentFactory(getApplicationContext(), userId);
+                startActivity(intent);
+            }
+        });
     }
 
 
