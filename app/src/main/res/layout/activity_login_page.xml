@@ -7,42 +7,45 @@
     tools:context=".Login_Page">
 
     <TextView
+        android:id="@+id/Login_Title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login"
-        android:id="@+id/Login_Title_textView"
-        android:textSize="25sp"
+        android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.172" />
 
     <TextView
         android:id="@+id/user_textView"
         android:layout_width="85dp"
         android:layout_height="36dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="92dp"
         android:text="@string/user"
         android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/username_textEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login_Title_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Login_Title_textView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/username_textEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="232dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter_username"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.716"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/password_textView"
@@ -55,7 +58,7 @@
         app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_textView"
-        app:layout_constraintVertical_bias="0.121" />
+        app:layout_constraintVertical_bias="0.115" />
 
     <EditText
         android:id="@+id/password_editText"
@@ -74,8 +77,8 @@
 
     <Button
         android:id="@+id/login_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="105dp"
+        android:layout_height="47dp"
         android:layout_marginTop="50dp"
         android:text="@string/sign_in"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,7 +96,27 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login_button"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.004" />
+
+    <ImageView
+        android:id="@+id/soundwave_logo_left"
+        android:layout_width="98dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="96dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/soundwave_logo" />
+
+    <ImageView
+        android:id="@+id/soundwave_logo_right"
+        android:layout_width="98dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginEnd="52dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/soundwave_logo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

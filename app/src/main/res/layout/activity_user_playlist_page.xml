@@ -23,9 +23,8 @@
         android:id="@+id/Artist1"
         android:layout_width="272dp"
         android:layout_height="80dp"
-        android:layout_marginStart="4dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
         app:layout_constraintVertical_bias="0.122" />
@@ -34,8 +33,8 @@
         android:id="@+id/Artist2"
         android:layout_width="272dp"
         android:layout_height="80dp"
-        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
         app:layout_constraintVertical_bias="0.255" />
@@ -44,8 +43,8 @@
         android:id="@+id/Artist3"
         android:layout_width="272dp"
         android:layout_height="80dp"
-        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
         app:layout_constraintVertical_bias="0.388" />
@@ -54,8 +53,8 @@
         android:id="@+id/Artist4"
         android:layout_width="272dp"
         android:layout_height="80dp"
-        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
         app:layout_constraintVertical_bias="0.52" />
@@ -65,8 +64,8 @@
         android:layout_width="272dp"
         android:layout_height="80dp"
 
-        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/my_playlist_Title_textView"
         app:layout_constraintVertical_bias="0.653" />
@@ -78,7 +77,7 @@
         android:text="@string/clear_playlist"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintHorizontal_bias="0.942"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.945" />
@@ -90,9 +89,20 @@
         android:text="@string/go_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.945" />
+
+    <ImageView
+        android:id="@+id/music_symbols_center"
+        android:layout_width="162dp"
+        android:layout_height="184dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Artist5"
+        app:srcCompat="@drawable/music_symbols" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

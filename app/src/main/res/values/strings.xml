@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project2_Sound_Wave</string>
+    <string name="app_name">SoundWave</string>
     <string name="login">Login</string>
     <string name="user">User</string>
     <string name="enter_username">Enter username</string>
