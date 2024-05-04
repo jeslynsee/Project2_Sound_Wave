@@ -58,4 +58,5 @@
     <string name="no_artists_found">No artists found.</string>
     <string name="view_artists">View Artists</string>
     <string name="clear_recently_added">Clear Recently Added</string>
+    <string name="go_back">Go Back</string>
 </resources>
