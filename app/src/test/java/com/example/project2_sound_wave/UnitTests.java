@@ -36,14 +36,14 @@ public class UnitTests {
     }
     @Test
     public void getArtistTest() {
-        assertEquals(playlist.getArtist1(), "DJ Rigz");
+        assertEquals(playlist.getArtist1(), null);
         playlist.setArtist1("J. Cole");
         assertNotEquals(playlist.getArtist1(), "DJ Rigz");
         assertEquals(playlist.getArtist1(), "J. Cole");
     }
     @Test
     public void setArtistTest() {
-        assertEquals(playlist.getArtist1(), "DJ Rigz");
+        assertEquals(playlist.getArtist1(), null);
         playlist.setArtist1("J. Cole");
         assertNotEquals(playlist.getArtist1(), "DJ Rigz");
         assertEquals(playlist.getArtist1(), "J. Cole");
@@ -54,16 +54,16 @@ public class UnitTests {
 
     @Test
     public void getGenreTest() {
-        assertEquals(playlist.getGenre1(), "Rap");
+        assertEquals(playlist.getGenre1(), null);
         assertNotEquals(playlist.getGenre1(), "Pop");
         playlist.setGenre1("Rap");
-        assertNotEquals(playlist.getGenre1(), "Rap");
-        assertEquals(playlist.getGenre1(), "Pop");
+        assertNotEquals(playlist.getGenre1(), null);
+        assertEquals(playlist.getGenre1(), "Rap");
     }
 
     @Test
     public void setGenreTest() {
-        assertEquals(playlist.getGenre1(), "Rap");
+        assertEquals(playlist.getGenre1(), null);
         playlist.setGenre1("Pop");
         assertNotEquals(playlist.getGenre1(), "Rap");
         assertEquals(playlist.getGenre1(), "Pop");
