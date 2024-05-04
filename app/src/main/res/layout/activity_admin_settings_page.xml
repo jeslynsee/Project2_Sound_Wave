@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/light_purple"
     tools:context=".Admin_Settings_Page">
 
     <TextView
         android:id="@+id/admin_settings_Title_textView"
-        android:layout_width="263dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="28dp"
-
+        android:layout_width="265dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="56dp"
+        android:gravity="center"
         android:text="@string/admin_settings"
         android:textSize="35sp"
-        android:gravity="center"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -76,5 +77,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/admin_settings_Title_textView" />
+
+    <ImageView
+        android:id="@+id/admin_settings_icon"
+        android:layout_width="57dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.988"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/admin_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

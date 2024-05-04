@@ -1,9 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Project2_Sound_Wave" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Project2_Sound_Wave." parent="Theme.Material3.Light">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/dark_purple</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="actionBarStyle">@style/Base.Theme.Project2_Sound_Wave.ActionBar</item>
+        <item name="colorButtonNormal">@color/dark_purple</item>
+        <item name="itemBackground">@color/black</item>
     </style>
 
-    <style name="Theme.Project2_Sound_Wave" parent="Base.Theme.Project2_Sound_Wave" />
+    <style name="Base.Theme.Project2_Sound_Wave.ActionBar" parent="Widget.Material3.ActionBar.Solid">
+    </style>
+
 </resources>
